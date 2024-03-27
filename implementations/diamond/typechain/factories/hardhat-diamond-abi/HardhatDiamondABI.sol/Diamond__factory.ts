@@ -3462,424 +3462,41 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "DiamondCut__InvalidInitializationParameters",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__RemoveTargetNotZeroAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__ReplaceTargetIsIdentical",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorAlreadyAdded",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotFound",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotSpecified",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__TargetHasNoCode",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "ERC165Base__InvalidInterfaceId",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotTransitiveOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
     anonymous: false,
     inputs: [
       {
         components: [
           {
             internalType: "address",
-            name: "target",
+            name: "facetAddress",
             type: "address",
           },
           {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
+            internalType: "enum IDiamondCut.FacetCutAction",
             name: "action",
             type: "uint8",
           },
           {
             internalType: "bytes4[]",
-            name: "selectors",
+            name: "functionSelectors",
             type: "bytes4[]",
           },
         ],
         indexed: false,
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
+        internalType: "struct IDiamondCut.FacetCut[]",
+        name: "_diamondCut",
         type: "tuple[]",
       },
       {
         indexed: false,
         internalType: "address",
-        name: "target",
+        name: "_init",
         type: "address",
       },
       {
         indexed: false,
         internalType: "bytes",
-        name: "data",
-        type: "bytes",
-      },
-    ],
-    name: "DiamondCut",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "version",
-        type: "uint64",
-      },
-    ],
-    name: "Initialized",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
-        type: "tuple[]",
-      },
-      {
-        internalType: "address",
-        name: "target",
-        type: "address",
-      },
-      {
-        internalType: "bytes",
-        name: "data",
-        type: "bytes",
-      },
-    ],
-    name: "diamondCut",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes4",
-        name: "selector",
-        type: "bytes4",
-      },
-    ],
-    name: "facetAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "facet",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "facetAddresses",
-    outputs: [
-      {
-        internalType: "address[]",
-        name: "addresses",
-        type: "address[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "facet",
-        type: "address",
-      },
-    ],
-    name: "facetFunctionSelectors",
-    outputs: [
-      {
-        internalType: "bytes4[]",
-        name: "selectors",
-        type: "bytes4[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "facets",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        internalType: "struct IDiamondLoupe.Facet[]",
-        name: "diamondFacets",
-        type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getFallbackAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    name: "setFallbackAddress",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes4",
-        name: "interfaceId",
-        type: "bytes4",
-      },
-    ],
-    name: "supportsInterface",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__InvalidInitializationParameters",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__RemoveTargetNotZeroAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__ReplaceTargetIsIdentical",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorAlreadyAdded",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotFound",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotSpecified",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__TargetHasNoCode",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotTransitiveOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        indexed: false,
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
-        type: "tuple[]",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "target",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "bytes",
-        name: "data",
+        name: "_calldata",
         type: "bytes",
       },
     ],
@@ -3906,32 +3523,116 @@ const _abi = [
     type: "event",
   },
   {
+    anonymous: false,
     inputs: [
       {
         components: [
           {
             internalType: "address",
-            name: "target",
+            name: "facetAddress",
             type: "address",
           },
           {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
+            internalType: "enum IDiamondCut.FacetCutAction",
             name: "action",
             type: "uint8",
           },
           {
             internalType: "bytes4[]",
-            name: "selectors",
+            name: "functionSelectors",
             type: "bytes4[]",
           },
         ],
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "_facetCuts",
+        indexed: false,
+        internalType: "struct IDiamondCut.FacetCut[]",
+        name: "_diamondCut",
+        type: "tuple[]",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "_init",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "_calldata",
+        type: "bytes",
+      },
+    ],
+    name: "DiamondCut",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "facetAddress",
+            type: "address",
+          },
+          {
+            internalType: "enum IDiamondCut.FacetCutAction",
+            name: "action",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes4[]",
+            name: "functionSelectors",
+            type: "bytes4[]",
+          },
+        ],
+        indexed: false,
+        internalType: "struct IDiamondCut.FacetCut[]",
+        name: "_diamondCut",
+        type: "tuple[]",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "_init",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "_calldata",
+        type: "bytes",
+      },
+    ],
+    name: "DiamondCut",
+    type: "event",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "facetAddress",
+            type: "address",
+          },
+          {
+            internalType: "enum IDiamondCut.FacetCutAction",
+            name: "action",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes4[]",
+            name: "functionSelectors",
+            type: "bytes4[]",
+          },
+        ],
+        internalType: "struct IDiamondCut.FacetCut[]",
+        name: "_diamondCut",
         type: "tuple[]",
       },
       {
         internalType: "address",
-        name: "_target",
+        name: "_init",
         type: "address",
       },
       {
@@ -4004,12 +3705,12 @@ const _abi = [
         components: [
           {
             internalType: "address",
-            name: "target",
+            name: "facetAddress",
             type: "address",
           },
           {
             internalType: "bytes4[]",
-            name: "selectors",
+            name: "functionSelectors",
             type: "bytes4[]",
           },
         ],
@@ -4022,56 +3723,10 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "getFallbackAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    name: "setFallbackAddress",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [
       {
         internalType: "bytes4",
-        name: "interfaceId",
+        name: "_interfaceId",
         type: "bytes4",
       },
     ],
@@ -4087,141 +3742,22 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__InvalidInitializationParameters",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__RemoveTargetNotZeroAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__ReplaceTargetIsIdentical",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorAlreadyAdded",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotFound",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotSpecified",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__TargetHasNoCode",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotTransitiveOwner",
-    type: "error",
-  },
-  {
     anonymous: false,
     inputs: [
       {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        indexed: false,
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
-        type: "tuple[]",
-      },
-      {
-        indexed: false,
+        indexed: true,
         internalType: "address",
-        name: "target",
+        name: "previousOwner",
         type: "address",
       },
       {
-        indexed: false,
-        internalType: "bytes",
-        name: "data",
-        type: "bytes",
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
       },
     ],
-    name: "DiamondCut",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "version",
-        type: "uint64",
-      },
-    ],
-    name: "Initialized",
+    name: "OwnershipTransferred",
     type: "event",
   },
   {
@@ -4244,203 +3780,67 @@ const _abi = [
     type: "event",
   },
   {
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
-        type: "tuple[]",
-      },
+    inputs: [],
+    name: "owner",
+    outputs: [
       {
         internalType: "address",
-        name: "target",
+        name: "owner_",
         type: "address",
       },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
       {
-        internalType: "bytes",
-        name: "data",
-        type: "bytes",
+        internalType: "address",
+        name: "_newOwner",
+        type: "address",
       },
     ],
-    name: "diamondCut",
+    name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
   {
-    inputs: [],
-    name: "DiamondCut__InvalidInitializationParameters",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__RemoveTargetNotZeroAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__ReplaceTargetIsIdentical",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorAlreadyAdded",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotFound",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotSpecified",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__TargetHasNoCode",
-    type: "error",
-  },
-  {
     anonymous: false,
     inputs: [
       {
         components: [
           {
             internalType: "address",
-            name: "target",
+            name: "facetAddress",
             type: "address",
           },
           {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
+            internalType: "enum IDiamondCut.FacetCutAction",
             name: "action",
             type: "uint8",
           },
           {
             internalType: "bytes4[]",
-            name: "selectors",
+            name: "functionSelectors",
             type: "bytes4[]",
           },
         ],
         indexed: false,
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
+        internalType: "struct IDiamondCut.FacetCut[]",
+        name: "_diamondCut",
         type: "tuple[]",
       },
       {
         indexed: false,
         internalType: "address",
-        name: "target",
+        name: "_init",
         type: "address",
       },
       {
         indexed: false,
         internalType: "bytes",
-        name: "data",
-        type: "bytes",
-      },
-    ],
-    name: "DiamondCut",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__InvalidInitializationParameters",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__RemoveTargetNotZeroAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__ReplaceTargetIsIdentical",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorAlreadyAdded",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotFound",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotSpecified",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__TargetHasNoCode",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        indexed: false,
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
-        type: "tuple[]",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "target",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "bytes",
-        name: "data",
+        name: "_calldata",
         type: "bytes",
       },
     ],
@@ -4453,27 +3853,27 @@ const _abi = [
         components: [
           {
             internalType: "address",
-            name: "target",
+            name: "facetAddress",
             type: "address",
           },
           {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
+            internalType: "enum IDiamondCut.FacetCutAction",
             name: "action",
             type: "uint8",
           },
           {
             internalType: "bytes4[]",
-            name: "selectors",
+            name: "functionSelectors",
             type: "bytes4[]",
           },
         ],
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "_facetCuts",
+        internalType: "struct IDiamondCut.FacetCut[]",
+        name: "_diamondCut",
         type: "tuple[]",
       },
       {
         internalType: "address",
-        name: "_target",
+        name: "_init",
         type: "address",
       },
       {
@@ -4485,268 +3885,6 @@ const _abi = [
     name: "diamondCut",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__InvalidInitializationParameters",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__RemoveTargetNotZeroAddress",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__ReplaceTargetIsIdentical",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorAlreadyAdded",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorIsImmutable",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotFound",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__SelectorNotSpecified",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "DiamondCut__TargetHasNoCode",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "enum IDiamondCutInternal.FacetCutAction",
-            name: "action",
-            type: "uint8",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        indexed: false,
-        internalType: "struct IDiamondCutInternal.FacetCut[]",
-        name: "facetCuts",
-        type: "tuple[]",
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "target",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "bytes",
-        name: "data",
-        type: "bytes",
-      },
-    ],
-    name: "DiamondCut",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Ownable__NotTransitiveOwner",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "version",
-        type: "uint64",
-      },
-    ],
-    name: "Initialized",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
-    inputs: [],
-    name: "getFallbackAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    name: "setFallbackAddress",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "Proxy__ImplementationIsNotContract",
-    type: "error",
-  },
-  {
-    inputs: [],
-    name: "getFallbackAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "fallbackAddress",
-        type: "address",
-      },
-    ],
-    name: "setFallbackAddress",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes4",
-        name: "selector",
-        type: "bytes4",
-      },
-    ],
-    name: "facetAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "facet",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "facetAddresses",
-    outputs: [
-      {
-        internalType: "address[]",
-        name: "addresses",
-        type: "address[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "facet",
-        type: "address",
-      },
-    ],
-    name: "facetFunctionSelectors",
-    outputs: [
-      {
-        internalType: "bytes4[]",
-        name: "selectors",
-        type: "bytes4[]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "facets",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "target",
-            type: "address",
-          },
-          {
-            internalType: "bytes4[]",
-            name: "selectors",
-            type: "bytes4[]",
-          },
-        ],
-        internalType: "struct IDiamondLoupe.Facet[]",
-        name: "diamondFacets",
-        type: "tuple[]",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -4808,12 +3946,12 @@ const _abi = [
         components: [
           {
             internalType: "address",
-            name: "target",
+            name: "facetAddress",
             type: "address",
           },
           {
             internalType: "bytes4[]",
-            name: "selectors",
+            name: "functionSelectors",
             type: "bytes4[]",
           },
         ],
@@ -4823,6 +3961,321 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4",
+      },
+    ],
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "owner_",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Approval",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+    ],
+    name: "allowance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "approve",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "transfer",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "transferFrom",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "facetAddress",
+            type: "address",
+          },
+          {
+            internalType: "enum IDiamondCut.FacetCutAction",
+            name: "action",
+            type: "uint8",
+          },
+          {
+            internalType: "bytes4[]",
+            name: "functionSelectors",
+            type: "bytes4[]",
+          },
+        ],
+        indexed: false,
+        internalType: "struct IDiamondCut.FacetCut[]",
+        name: "_diamondCut",
+        type: "tuple[]",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "_init",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bytes",
+        name: "_calldata",
+        type: "bytes",
+      },
+    ],
+    name: "DiamondCut",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "init",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

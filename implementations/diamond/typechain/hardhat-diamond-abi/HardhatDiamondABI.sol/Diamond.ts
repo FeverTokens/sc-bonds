@@ -23,27 +23,30 @@ import type {
   TypedContractMethod,
 } from "../../common";
 
-export declare namespace IDiamondCutInternal {
+export declare namespace IDiamondCut {
   export type FacetCutStruct = {
-    target: AddressLike;
+    facetAddress: AddressLike;
     action: BigNumberish;
-    selectors: BytesLike[];
+    functionSelectors: BytesLike[];
   };
 
   export type FacetCutStructOutput = [
-    target: string,
+    facetAddress: string,
     action: bigint,
-    selectors: string[]
-  ] & { target: string; action: bigint; selectors: string[] };
+    functionSelectors: string[]
+  ] & { facetAddress: string; action: bigint; functionSelectors: string[] };
 }
 
 export declare namespace IDiamondLoupe {
-  export type FacetStruct = { target: AddressLike; selectors: BytesLike[] };
-
-  export type FacetStructOutput = [target: string, selectors: string[]] & {
-    target: string;
-    selectors: string[];
+  export type FacetStruct = {
+    facetAddress: AddressLike;
+    functionSelectors: BytesLike[];
   };
+
+  export type FacetStructOutput = [
+    facetAddress: string,
+    functionSelectors: string[]
+  ] & { facetAddress: string; functionSelectors: string[] };
 }
 
 export declare namespace IRegisterMetadataInternal {
@@ -237,8 +240,6 @@ export interface DiamondInterface extends Interface {
       | "transferOwnership(address)"
       | "renounceOwnership()"
       | "renounceOwnership()"
-      | "renounceOwnership()"
-      | "renounceOwnership()"
       | "getRoleMember(bytes32,uint256)"
       | "getRoleMember(bytes32,uint256)"
       | "getRoleMember(bytes32,uint256)"
@@ -374,38 +375,14 @@ export interface DiamondInterface extends Interface {
       | "size"
       | "diamondCut((address,uint8,bytes4[])[],address,bytes)"
       | "diamondCut((address,uint8,bytes4[])[],address,bytes)"
-      | "diamondCut((address,uint8,bytes4[])[],address,bytes)"
-      | "diamondCut((address,uint8,bytes4[])[],address,bytes)"
-      | "facetAddress(bytes4)"
-      | "facetAddress(bytes4)"
       | "facetAddress(bytes4)"
       | "facetAddress(bytes4)"
       | "facetAddresses()"
       | "facetAddresses()"
-      | "facetAddresses()"
-      | "facetAddresses()"
-      | "facetFunctionSelectors(address)"
-      | "facetFunctionSelectors(address)"
       | "facetFunctionSelectors(address)"
       | "facetFunctionSelectors(address)"
       | "facets()"
       | "facets()"
-      | "facets()"
-      | "facets()"
-      | "getFallbackAddress()"
-      | "getFallbackAddress()"
-      | "getFallbackAddress()"
-      | "getFallbackAddress()"
-      | "setFallbackAddress(address)"
-      | "setFallbackAddress(address)"
-      | "setFallbackAddress(address)"
-      | "setFallbackAddress(address)"
-      | "addCouponDate(uint256)"
-      | "addCouponDate(uint256)"
-      | "addCouponDate(uint256)"
-      | "addressForNewAdmin()"
-      | "addressForNewAdmin()"
-      | "addressForNewAdmin()"
       | "allowance(address,address)"
       | "allowance(address,address)"
       | "allowance(address,address)"
@@ -418,6 +395,8 @@ export interface DiamondInterface extends Interface {
       | "allowance(address,address)"
       | "allowance(address,address)"
       | "allowance(address,address)"
+      | "allowance(address,address)"
+      | "approve(address,uint256)"
       | "approve(address,uint256)"
       | "approve(address,uint256)"
       | "approve(address,uint256)"
@@ -435,9 +414,7 @@ export interface DiamondInterface extends Interface {
       | "approve(address,uint256)"
       | "approve()"
       | "approve()"
-      | "atReturningHash(address)"
-      | "atReturningHash(address)"
-      | "atReturningHash(address)"
+      | "balanceOf(address)"
       | "balanceOf(address)"
       | "balanceOf(address)"
       | "balanceOf(address)"
@@ -456,235 +433,7 @@ export interface DiamondInterface extends Interface {
       | "balanceOf(address)"
       | "balanceOf(address)"
       | "balanceOf(address)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfAt(address,uint256)"
-      | "balanceOfCoupon(address,uint256)"
-      | "balanceOfCoupon(address,uint256)"
-      | "balanceOfCoupon(address,uint256)"
-      | "burn(uint256)"
-      | "burn(uint256)"
-      | "burn(uint256)"
-      | "burn(uint256)"
-      | "burn(uint256)"
-      | "changeAdminRole(address)"
-      | "changeAdminRole(address)"
-      | "changeAdminRole(address)"
-      | "checkIfCouponDateExists(uint256)"
-      | "checkIfCouponDateExists(uint256)"
-      | "checkIfCouponDateExists(uint256)"
-      | "checkIfMaturityDateExists(uint256)"
-      | "checkIfMaturityDateExists(uint256)"
-      | "checkIfMaturityDateExists(uint256)"
-      | "currentCouponDate()"
-      | "currentCouponDate()"
-      | "currentCouponDate()"
-      | "currentSnapshotDatetime()"
-      | "currentSnapshotDatetime()"
-      | "currentSnapshotDatetime()"
-      | "decimals()"
-      | "decimals()"
-      | "decimals()"
-      | "decimals()"
-      | "decimals()"
-      | "decimals()"
-      | "decimals()"
-      | "decimals()"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "decreaseAllowance(address,uint256)"
-      | "delCouponDate(uint256)"
-      | "delCouponDate(uint256)"
-      | "delCouponDate(uint256)"
-      | "disableContractFromWhitelist(bytes32)"
-      | "disableContractFromWhitelist(bytes32)"
-      | "disableContractFromWhitelist(bytes32)"
-      | "disableInvestorFromWhitelist(address)"
-      | "disableInvestorFromWhitelist(address)"
-      | "disableInvestorFromWhitelist(address)"
-      | "enableContractToWhitelist(bytes32)"
-      | "enableContractToWhitelist(bytes32)"
-      | "enableContractToWhitelist(bytes32)"
-      | "enableInvestorToWhitelist(address)"
-      | "enableInvestorToWhitelist(address)"
-      | "enableInvestorToWhitelist(address)"
-      | "firstVoterForNewAdmin()"
-      | "firstVoterForNewAdmin()"
-      | "firstVoterForNewAdmin()"
-      | "getAllInvestors()"
-      | "getAllInvestors()"
-      | "getAllInvestors()"
-      | "getBondCouponRate()"
-      | "getBondCouponRate()"
-      | "getBondCouponRate()"
-      | "getBondData()"
-      | "getBondData()"
-      | "getBondData()"
-      | "getBondUnitValue()"
-      | "getBondUnitValue()"
-      | "getBondUnitValue()"
-      | "getCreationDate()"
-      | "getCreationDate()"
-      | "getCreationDate()"
-      | "getInvestorListAtCoupon(uint256)"
-      | "getInvestorListAtCoupon(uint256)"
-      | "getInvestorListAtCoupon(uint256)"
-      | "getIssuanceDate()"
-      | "getIssuanceDate()"
-      | "getIssuanceDate()"
-      | "grantBndRole(address)"
-      | "grantBndRole(address)"
-      | "grantBndRole(address)"
-      | "grantCakRole(address)"
-      | "grantCakRole(address)"
-      | "grantCakRole(address)"
-      | "grantCstRole(address)"
-      | "grantCstRole(address)"
-      | "grantCstRole(address)"
-      | "grantPayRole(address)"
-      | "grantPayRole(address)"
-      | "grantPayRole(address)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "increaseAllowance(address,uint256)"
-      | "investorCustodian(address)"
-      | "investorCustodian(address)"
-      | "investorCustodian(address)"
-      | "investorsAllowed(address)"
-      | "investorsAllowed(address)"
-      | "investorsAllowed(address)"
-      | "isBnD(address)"
-      | "isBnD(address)"
-      | "isBnD(address)"
-      | "isCAK(address)"
-      | "isCAK(address)"
-      | "isCAK(address)"
-      | "isCallerApprovedSmartContract()"
-      | "isCallerApprovedSmartContract()"
-      | "isCallerApprovedSmartContract()"
-      | "isContractAllowed(address)"
-      | "isContractAllowed(address)"
-      | "isContractAllowed(address)"
-      | "isCustodian(address)"
-      | "isCustodian(address)"
-      | "isCustodian(address)"
-      | "isPay(address)"
-      | "isPay(address)"
-      | "isPay(address)"
-      | "makeReady()"
-      | "makeReady()"
-      | "makeReady()"
-      | "mint(uint256)"
-      | "mint(uint256)"
-      | "mint(uint256)"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "name()"
-      | "nextSnapshotDatetime()"
-      | "nextSnapshotDatetime()"
-      | "nextSnapshotDatetime()"
-      | "primaryIssuanceAccount()"
-      | "primaryIssuanceAccount()"
-      | "primaryIssuanceAccount()"
-      | "publicMessage(address,string)"
-      | "publicMessage(address,string)"
-      | "publicMessage(address,string)"
-      | "registerAdmin()"
-      | "registerAdmin()"
-      | "registerAdmin()"
-      | "returnBalanceToPrimaryIssuanceAccount(address)"
-      | "returnBalanceToPrimaryIssuanceAccount(address)"
-      | "returnBalanceToPrimaryIssuanceAccount(address)"
-      | "revertReady()"
-      | "revertReady()"
-      | "revertReady()"
-      | "revokeBndRole(address)"
-      | "revokeBndRole(address)"
-      | "revokeBndRole(address)"
-      | "revokeCakRole(address)"
-      | "revokeCakRole(address)"
-      | "revokeCakRole(address)"
-      | "revokeCstRole(address)"
-      | "revokeCstRole(address)"
-      | "revokeCstRole(address)"
-      | "revokePayRole(address)"
-      | "revokePayRole(address)"
-      | "revokePayRole(address)"
-      | "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)"
-      | "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)"
-      | "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)"
-      | "setCreationDate(uint256)"
-      | "setCreationDate(uint256)"
-      | "setCreationDate(uint256)"
-      | "setCurrency(bytes32)"
-      | "setCurrency(bytes32)"
-      | "setCurrency(bytes32)"
-      | "setCurrentCouponDate(uint256,uint256)"
-      | "setCurrentCouponDate(uint256,uint256)"
-      | "setCurrentCouponDate(uint256,uint256)"
-      | "setExpectedSupply(uint256)"
-      | "setExpectedSupply(uint256)"
-      | "setExpectedSupply(uint256)"
-      | "setIsinSymbol(string)"
-      | "setIsinSymbol(string)"
-      | "setIsinSymbol(string)"
-      | "setIssuanceDate(uint256)"
-      | "setIssuanceDate(uint256)"
-      | "setIssuanceDate(uint256)"
-      | "setName(string)"
-      | "setName(string)"
-      | "setName(string)"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "status()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "symbol()"
-      | "toggleFrozen()"
-      | "toggleFrozen()"
-      | "toggleFrozen()"
+      | "totalSupply()"
       | "totalSupply()"
       | "totalSupply()"
       | "totalSupply()"
@@ -701,6 +450,274 @@ export interface DiamondInterface extends Interface {
       | "totalSupply()"
       | "totalSupply()"
       | "totalSupply()"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transfer(address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "transferFrom(address,address,uint256)"
+      | "init"
+      | "addCouponDate(uint256)"
+      | "addCouponDate(uint256)"
+      | "addCouponDate(uint256)"
+      | "addressForNewAdmin()"
+      | "addressForNewAdmin()"
+      | "addressForNewAdmin()"
+      | "atReturningHash(address)"
+      | "atReturningHash(address)"
+      | "atReturningHash(address)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfAt(address,uint256)"
+      | "balanceOfCoupon(address,uint256)"
+      | "balanceOfCoupon(address,uint256)"
+      | "balanceOfCoupon(address,uint256)"
+      | "burn(uint256)"
+      | "burn(uint256)"
+      | "burn(uint256)"
+      | "burn(uint256)"
+      | "burn(uint256)"
+      | "changeAdminRole(address)"
+      | "changeAdminRole(address)"
+      | "changeAdminRole(address)"
+      | "checkIfCouponDateExists(uint256)"
+      | "checkIfCouponDateExists(uint256)"
+      | "checkIfCouponDateExists(uint256)"
+      | "checkIfMaturityDateExists(uint256)"
+      | "checkIfMaturityDateExists(uint256)"
+      | "checkIfMaturityDateExists(uint256)"
+      | "currentCouponDate()"
+      | "currentCouponDate()"
+      | "currentCouponDate()"
+      | "currentSnapshotDatetime()"
+      | "currentSnapshotDatetime()"
+      | "currentSnapshotDatetime()"
+      | "decimals()"
+      | "decimals()"
+      | "decimals()"
+      | "decimals()"
+      | "decimals()"
+      | "decimals()"
+      | "decimals()"
+      | "decimals()"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "decreaseAllowance(address,uint256)"
+      | "delCouponDate(uint256)"
+      | "delCouponDate(uint256)"
+      | "delCouponDate(uint256)"
+      | "disableContractFromWhitelist(bytes32)"
+      | "disableContractFromWhitelist(bytes32)"
+      | "disableContractFromWhitelist(bytes32)"
+      | "disableInvestorFromWhitelist(address)"
+      | "disableInvestorFromWhitelist(address)"
+      | "disableInvestorFromWhitelist(address)"
+      | "enableContractToWhitelist(bytes32)"
+      | "enableContractToWhitelist(bytes32)"
+      | "enableContractToWhitelist(bytes32)"
+      | "enableInvestorToWhitelist(address)"
+      | "enableInvestorToWhitelist(address)"
+      | "enableInvestorToWhitelist(address)"
+      | "firstVoterForNewAdmin()"
+      | "firstVoterForNewAdmin()"
+      | "firstVoterForNewAdmin()"
+      | "getAllInvestors()"
+      | "getAllInvestors()"
+      | "getAllInvestors()"
+      | "getBondCouponRate()"
+      | "getBondCouponRate()"
+      | "getBondCouponRate()"
+      | "getBondData()"
+      | "getBondData()"
+      | "getBondData()"
+      | "getBondUnitValue()"
+      | "getBondUnitValue()"
+      | "getBondUnitValue()"
+      | "getCreationDate()"
+      | "getCreationDate()"
+      | "getCreationDate()"
+      | "getInvestorListAtCoupon(uint256)"
+      | "getInvestorListAtCoupon(uint256)"
+      | "getInvestorListAtCoupon(uint256)"
+      | "getIssuanceDate()"
+      | "getIssuanceDate()"
+      | "getIssuanceDate()"
+      | "grantBndRole(address)"
+      | "grantBndRole(address)"
+      | "grantBndRole(address)"
+      | "grantCakRole(address)"
+      | "grantCakRole(address)"
+      | "grantCakRole(address)"
+      | "grantCstRole(address)"
+      | "grantCstRole(address)"
+      | "grantCstRole(address)"
+      | "grantPayRole(address)"
+      | "grantPayRole(address)"
+      | "grantPayRole(address)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "increaseAllowance(address,uint256)"
+      | "investorCustodian(address)"
+      | "investorCustodian(address)"
+      | "investorCustodian(address)"
+      | "investorsAllowed(address)"
+      | "investorsAllowed(address)"
+      | "investorsAllowed(address)"
+      | "isBnD(address)"
+      | "isBnD(address)"
+      | "isBnD(address)"
+      | "isCAK(address)"
+      | "isCAK(address)"
+      | "isCAK(address)"
+      | "isCallerApprovedSmartContract()"
+      | "isCallerApprovedSmartContract()"
+      | "isCallerApprovedSmartContract()"
+      | "isContractAllowed(address)"
+      | "isContractAllowed(address)"
+      | "isContractAllowed(address)"
+      | "isCustodian(address)"
+      | "isCustodian(address)"
+      | "isCustodian(address)"
+      | "isPay(address)"
+      | "isPay(address)"
+      | "isPay(address)"
+      | "makeReady()"
+      | "makeReady()"
+      | "makeReady()"
+      | "mint(uint256)"
+      | "mint(uint256)"
+      | "mint(uint256)"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "name()"
+      | "nextSnapshotDatetime()"
+      | "nextSnapshotDatetime()"
+      | "nextSnapshotDatetime()"
+      | "primaryIssuanceAccount()"
+      | "primaryIssuanceAccount()"
+      | "primaryIssuanceAccount()"
+      | "publicMessage(address,string)"
+      | "publicMessage(address,string)"
+      | "publicMessage(address,string)"
+      | "registerAdmin()"
+      | "registerAdmin()"
+      | "registerAdmin()"
+      | "returnBalanceToPrimaryIssuanceAccount(address)"
+      | "returnBalanceToPrimaryIssuanceAccount(address)"
+      | "returnBalanceToPrimaryIssuanceAccount(address)"
+      | "revertReady()"
+      | "revertReady()"
+      | "revertReady()"
+      | "revokeBndRole(address)"
+      | "revokeBndRole(address)"
+      | "revokeBndRole(address)"
+      | "revokeCakRole(address)"
+      | "revokeCakRole(address)"
+      | "revokeCakRole(address)"
+      | "revokeCstRole(address)"
+      | "revokeCstRole(address)"
+      | "revokeCstRole(address)"
+      | "revokePayRole(address)"
+      | "revokePayRole(address)"
+      | "revokePayRole(address)"
+      | "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)"
+      | "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)"
+      | "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)"
+      | "setCreationDate(uint256)"
+      | "setCreationDate(uint256)"
+      | "setCreationDate(uint256)"
+      | "setCurrency(bytes32)"
+      | "setCurrency(bytes32)"
+      | "setCurrency(bytes32)"
+      | "setCurrentCouponDate(uint256,uint256)"
+      | "setCurrentCouponDate(uint256,uint256)"
+      | "setCurrentCouponDate(uint256,uint256)"
+      | "setExpectedSupply(uint256)"
+      | "setExpectedSupply(uint256)"
+      | "setExpectedSupply(uint256)"
+      | "setIsinSymbol(string)"
+      | "setIsinSymbol(string)"
+      | "setIsinSymbol(string)"
+      | "setIssuanceDate(uint256)"
+      | "setIssuanceDate(uint256)"
+      | "setIssuanceDate(uint256)"
+      | "setName(string)"
+      | "setName(string)"
+      | "setName(string)"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "status()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "symbol()"
+      | "toggleFrozen()"
+      | "toggleFrozen()"
+      | "toggleFrozen()"
       | "totalSupplyAt(uint256)"
       | "totalSupplyAt(uint256)"
       | "totalSupplyAt(uint256)"
@@ -712,33 +729,6 @@ export interface DiamondInterface extends Interface {
       | "totalSupplyAtCoupon(uint256)"
       | "totalSupplyAtCoupon(uint256)"
       | "totalSupplyAtCoupon(uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transfer(address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
-      | "transferFrom(address,address,uint256)"
       | "votesForNewAdmin()"
       | "votesForNewAdmin()"
       | "votesForNewAdmin()"
@@ -1068,9 +1058,7 @@ export interface DiamondInterface extends Interface {
       | "OwnershipTransferred(address,address)"
       | "OwnershipTransferred(address,address)"
       | "OwnershipTransferred(address,address)"
-      | "Initialized(uint64)"
-      | "Initialized(uint64)"
-      | "Initialized(uint64)"
+      | "OwnershipTransferred(address,address)"
       | "Initialized(uint64)"
       | "Initialized(uint64)"
       | "Initialized(uint64)"
@@ -1120,7 +1108,62 @@ export interface DiamondInterface extends Interface {
       | "DiamondCut(tuple[],address,bytes)"
       | "DiamondCut(tuple[],address,bytes)"
       | "DiamondCut(tuple[],address,bytes)"
-      | "DiamondCut(tuple[],address,bytes)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Approval(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
+      | "Transfer(address,address,uint256)"
       | "AdminChanged(address)"
       | "AdminChanged(address)"
       | "AdminChanged(address)"
@@ -1134,33 +1177,6 @@ export interface DiamondInterface extends Interface {
       | "AdminChanged(address)"
       | "AdminChanged(address)"
       | "AdminChanged(address)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
-      | "Approval(address,address,uint256)"
       | "AssetHTLC(bytes32,address,address,bytes32,uint8)"
       | "AssetHTLC(bytes32,address,address,bytes32,uint8)"
       | "AssetHTLC(bytes32,address,address,bytes32,uint8)"
@@ -1242,33 +1258,6 @@ export interface DiamondInterface extends Interface {
       | "SnapshotTimestampChange(uint256,uint256,uint256)"
       | "SnapshotTimestampChange(uint256,uint256,uint256)"
       | "SnapshotTimestampChange(uint256,uint256,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
-      | "Transfer(address,address,uint256)"
       | "WalletAddedToWhitelist(address)"
       | "WalletAddedToWhitelist(address)"
       | "WalletAddedToWhitelist(address)"
@@ -1832,14 +1821,6 @@ export interface DiamondInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "renounceOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "getRoleMember(bytes32,uint256)",
     values: [BytesLike, BigNumberish]
   ): string;
@@ -2274,27 +2255,11 @@ export interface DiamondInterface extends Interface {
   encodeFunctionData(functionFragment: "size", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    values: [IDiamondCutInternal.FacetCutStruct[], AddressLike, BytesLike]
+    values: [IDiamondCut.FacetCutStruct[], AddressLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    values: [IDiamondCutInternal.FacetCutStruct[], AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    values: [IDiamondCutInternal.FacetCutStruct[], AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    values: [IDiamondCutInternal.FacetCutStruct[], AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetAddress(bytes4)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetAddress(bytes4)",
-    values: [BytesLike]
+    values: [IDiamondCut.FacetCutStruct[], AddressLike, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "facetAddress(bytes4)",
@@ -2313,22 +2278,6 @@ export interface DiamondInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "facetAddresses()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetAddresses()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetFunctionSelectors(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetFunctionSelectors(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
     functionFragment: "facetFunctionSelectors(address)",
     values: [AddressLike]
   ): string;
@@ -2338,63 +2287,9 @@ export interface DiamondInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "facets()", values?: undefined): string;
   encodeFunctionData(functionFragment: "facets()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "facets()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "facets()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getFallbackAddress()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getFallbackAddress()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getFallbackAddress()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getFallbackAddress()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFallbackAddress(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFallbackAddress(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFallbackAddress(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFallbackAddress(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addCouponDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addCouponDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addCouponDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addressForNewAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addressForNewAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addressForNewAdmin()",
-    values?: undefined
+    functionFragment: "allowance(address,address)",
+    values: [AddressLike, AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "allowance(address,address)",
@@ -2443,6 +2338,10 @@ export interface DiamondInterface extends Interface {
   encodeFunctionData(
     functionFragment: "allowance(address,address)",
     values: [AddressLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve(address,uint256)",
+    values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "approve(address,uint256)",
@@ -2507,15 +2406,7 @@ export interface DiamondInterface extends Interface {
   encodeFunctionData(functionFragment: "approve()", values?: undefined): string;
   encodeFunctionData(functionFragment: "approve()", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "atReturningHash(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "atReturningHash(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "atReturningHash(address)",
+    functionFragment: "balanceOf(address)",
     values: [AddressLike]
   ): string;
   encodeFunctionData(
@@ -2591,856 +2482,7 @@ export interface DiamondInterface extends Interface {
     values: [AddressLike]
   ): string;
   encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfAt(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfCoupon(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfCoupon(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "balanceOfCoupon(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "burn(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "burn(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "burn(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "burn(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "burn(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeAdminRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeAdminRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "changeAdminRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkIfCouponDateExists(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkIfCouponDateExists(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkIfCouponDateExists(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkIfMaturityDateExists(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkIfMaturityDateExists(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkIfMaturityDateExists(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "currentCouponDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "currentCouponDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "currentCouponDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "currentSnapshotDatetime()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "currentSnapshotDatetime()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "currentSnapshotDatetime()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decimals()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "delCouponDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "delCouponDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "delCouponDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "disableContractFromWhitelist(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "disableContractFromWhitelist(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "disableContractFromWhitelist(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "disableInvestorFromWhitelist(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "disableInvestorFromWhitelist(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "disableInvestorFromWhitelist(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "enableContractToWhitelist(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "enableContractToWhitelist(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "enableContractToWhitelist(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "enableInvestorToWhitelist(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "enableInvestorToWhitelist(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "enableInvestorToWhitelist(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "firstVoterForNewAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "firstVoterForNewAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "firstVoterForNewAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAllInvestors()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAllInvestors()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAllInvestors()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondCouponRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondCouponRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondCouponRate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondData()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondData()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondData()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondUnitValue()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondUnitValue()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBondUnitValue()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getCreationDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getCreationDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getCreationDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getInvestorListAtCoupon(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getInvestorListAtCoupon(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getInvestorListAtCoupon(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getIssuanceDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getIssuanceDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getIssuanceDate()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantBndRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantBndRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantBndRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantCakRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantCakRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantCakRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantCstRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantCstRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantCstRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantPayRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantPayRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "grantPayRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseAllowance(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "investorCustodian(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "investorCustodian(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "investorCustodian(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "investorsAllowed(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "investorsAllowed(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "investorsAllowed(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isBnD(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isBnD(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isBnD(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCAK(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCAK(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCAK(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCallerApprovedSmartContract()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCallerApprovedSmartContract()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCallerApprovedSmartContract()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isContractAllowed(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isContractAllowed(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isContractAllowed(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCustodian(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCustodian(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isCustodian(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isPay(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isPay(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isPay(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "makeReady()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "makeReady()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "makeReady()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mint(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mint(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "mint(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "nextSnapshotDatetime()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "nextSnapshotDatetime()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "nextSnapshotDatetime()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "primaryIssuanceAccount()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "primaryIssuanceAccount()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "primaryIssuanceAccount()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "publicMessage(address,string)",
-    values: [AddressLike, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "publicMessage(address,string)",
-    values: [AddressLike, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "publicMessage(address,string)",
-    values: [AddressLike, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "registerAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "registerAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "registerAdmin()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revertReady()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revertReady()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revertReady()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeBndRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeBndRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeBndRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeCakRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeCakRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeCakRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeCstRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeCstRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokeCstRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokePayRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokePayRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "revokePayRole(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
-    values: [
-      string,
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
-    values: [
-      string,
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
-    values: [
-      string,
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
-    ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCreationDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCreationDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCreationDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCurrency(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCurrency(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCurrency(bytes32)",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCurrentCouponDate(uint256,uint256)",
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCurrentCouponDate(uint256,uint256)",
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setCurrentCouponDate(uint256,uint256)",
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setExpectedSupply(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setExpectedSupply(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setExpectedSupply(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIsinSymbol(string)",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIsinSymbol(string)",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIsinSymbol(string)",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIssuanceDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIssuanceDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setIssuanceDate(uint256)",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setName(string)",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setName(string)",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setName(string)",
-    values: [string]
-  ): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "toggleFrozen()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "toggleFrozen()",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "toggleFrozen()",
+    functionFragment: "totalSupply()",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -3508,6 +2550,1012 @@ export interface DiamondInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transfer(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferFrom(address,address,uint256)",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "init", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "addCouponDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addCouponDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addCouponDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addressForNewAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addressForNewAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addressForNewAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "atReturningHash(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "atReturningHash(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "atReturningHash(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfAt(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfCoupon(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfCoupon(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "balanceOfCoupon(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "burn(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeAdminRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeAdminRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "changeAdminRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfCouponDateExists(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfCouponDateExists(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfCouponDateExists(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfMaturityDateExists(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfMaturityDateExists(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkIfMaturityDateExists(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentCouponDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentCouponDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentCouponDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentSnapshotDatetime()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentSnapshotDatetime()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "currentSnapshotDatetime()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decimals()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "delCouponDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "delCouponDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "delCouponDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableContractFromWhitelist(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableContractFromWhitelist(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableContractFromWhitelist(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableInvestorFromWhitelist(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableInvestorFromWhitelist(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "disableInvestorFromWhitelist(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enableContractToWhitelist(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enableContractToWhitelist(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enableContractToWhitelist(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enableInvestorToWhitelist(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enableInvestorToWhitelist(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enableInvestorToWhitelist(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "firstVoterForNewAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "firstVoterForNewAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "firstVoterForNewAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllInvestors()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllInvestors()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllInvestors()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondCouponRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondCouponRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondCouponRate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondData()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondUnitValue()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondUnitValue()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBondUnitValue()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCreationDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCreationDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCreationDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInvestorListAtCoupon(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInvestorListAtCoupon(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getInvestorListAtCoupon(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getIssuanceDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getIssuanceDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getIssuanceDate()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantBndRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantBndRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantBndRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantCakRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantCakRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantCakRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantCstRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantCstRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantCstRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantPayRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantPayRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantPayRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "increaseAllowance(address,uint256)",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "investorCustodian(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "investorCustodian(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "investorCustodian(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "investorsAllowed(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "investorsAllowed(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "investorsAllowed(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isBnD(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isBnD(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isBnD(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCAK(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCAK(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCAK(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCallerApprovedSmartContract()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCallerApprovedSmartContract()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCallerApprovedSmartContract()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isContractAllowed(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isContractAllowed(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isContractAllowed(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCustodian(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCustodian(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isCustodian(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isPay(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isPay(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "isPay(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "makeReady()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "makeReady()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "makeReady()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mint(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mint(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mint(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "name()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nextSnapshotDatetime()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nextSnapshotDatetime()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "nextSnapshotDatetime()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "primaryIssuanceAccount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "primaryIssuanceAccount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "primaryIssuanceAccount()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "publicMessage(address,string)",
+    values: [AddressLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "publicMessage(address,string)",
+    values: [AddressLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "publicMessage(address,string)",
+    values: [AddressLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "registerAdmin()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revertReady()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revertReady()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revertReady()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeBndRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeBndRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeBndRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeCakRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeCakRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeCakRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeCstRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeCstRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeCstRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokePayRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokePayRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokePayRole(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      string,
+      BigNumberish,
+      BytesLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      string,
+      BigNumberish,
+      BytesLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
+    values: [
+      string,
+      BigNumberish,
+      BytesLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCreationDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCreationDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCreationDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCurrency(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCurrency(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCurrency(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCurrentCouponDate(uint256,uint256)",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCurrentCouponDate(uint256,uint256)",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCurrentCouponDate(uint256,uint256)",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setExpectedSupply(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setExpectedSupply(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setExpectedSupply(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIsinSymbol(string)",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIsinSymbol(string)",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIsinSymbol(string)",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIssuanceDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIssuanceDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setIssuanceDate(uint256)",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setName(string)",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setName(string)",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setName(string)",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "status()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(functionFragment: "symbol()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "toggleFrozen()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "toggleFrozen()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "toggleFrozen()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "totalSupplyAt(uint256)",
     values: [BigNumberish]
   ): string;
@@ -3550,114 +3598,6 @@ export interface DiamondInterface extends Interface {
   encodeFunctionData(
     functionFragment: "totalSupplyAtCoupon(uint256)",
     values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transfer(address,uint256)",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom(address,address,uint256)",
-    values: [AddressLike, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "votesForNewAdmin()",
@@ -5153,14 +5093,6 @@ export interface DiamondInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "renounceOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "getRoleMember(bytes32,uint256)",
     data: BytesLike
   ): Result;
@@ -5599,35 +5531,11 @@ export interface DiamondInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "facetAddress(bytes4)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "facetAddress(bytes4)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetAddress(bytes4)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetAddress(bytes4)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetAddresses()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetAddresses()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -5646,72 +5554,10 @@ export interface DiamondInterface extends Interface {
     functionFragment: "facetFunctionSelectors(address)",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetFunctionSelectors(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetFunctionSelectors(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "facets()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "facets()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "facets()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "facets()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getFallbackAddress()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getFallbackAddress()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getFallbackAddress()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getFallbackAddress()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setFallbackAddress(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setFallbackAddress(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setFallbackAddress(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setFallbackAddress(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addCouponDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addCouponDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addCouponDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addressForNewAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addressForNewAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addressForNewAdmin()",
+    functionFragment: "allowance(address,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -5760,6 +5606,10 @@ export interface DiamondInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "allowance(address,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "approve(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -5825,15 +5675,7 @@ export interface DiamondInterface extends Interface {
   decodeFunctionResult(functionFragment: "approve()", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve()", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "atReturningHash(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "atReturningHash(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "atReturningHash(address)",
+    functionFragment: "balanceOf(address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -5909,805 +5751,7 @@ export interface DiamondInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfAt(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfCoupon(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfCoupon(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "balanceOfCoupon(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "burn(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "burn(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "burn(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "burn(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "burn(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeAdminRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeAdminRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "changeAdminRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkIfCouponDateExists(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkIfCouponDateExists(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkIfCouponDateExists(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkIfMaturityDateExists(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkIfMaturityDateExists(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkIfMaturityDateExists(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "currentCouponDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "currentCouponDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "currentCouponDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "currentSnapshotDatetime()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "currentSnapshotDatetime()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "currentSnapshotDatetime()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "delCouponDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "delCouponDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "delCouponDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "disableContractFromWhitelist(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "disableContractFromWhitelist(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "disableContractFromWhitelist(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "disableInvestorFromWhitelist(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "disableInvestorFromWhitelist(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "disableInvestorFromWhitelist(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "enableContractToWhitelist(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "enableContractToWhitelist(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "enableContractToWhitelist(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "enableInvestorToWhitelist(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "enableInvestorToWhitelist(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "enableInvestorToWhitelist(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "firstVoterForNewAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "firstVoterForNewAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "firstVoterForNewAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getAllInvestors()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getAllInvestors()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getAllInvestors()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondCouponRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondCouponRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondCouponRate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondData()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondData()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondData()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondUnitValue()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondUnitValue()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBondUnitValue()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getCreationDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getCreationDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getCreationDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getInvestorListAtCoupon(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getInvestorListAtCoupon(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getInvestorListAtCoupon(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getIssuanceDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getIssuanceDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getIssuanceDate()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantBndRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantBndRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantBndRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantCakRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantCakRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantCakRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantCstRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantCstRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantCstRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantPayRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantPayRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "grantPayRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseAllowance(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "investorCustodian(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "investorCustodian(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "investorCustodian(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "investorsAllowed(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "investorsAllowed(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "investorsAllowed(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isBnD(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isBnD(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isBnD(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCAK(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCAK(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCAK(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCallerApprovedSmartContract()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCallerApprovedSmartContract()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCallerApprovedSmartContract()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isContractAllowed(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isContractAllowed(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isContractAllowed(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCustodian(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCustodian(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isCustodian(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isPay(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isPay(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isPay(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "makeReady()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "makeReady()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "makeReady()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "mint(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "mint(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "mint(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "nextSnapshotDatetime()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "nextSnapshotDatetime()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "nextSnapshotDatetime()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "primaryIssuanceAccount()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "primaryIssuanceAccount()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "primaryIssuanceAccount()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "publicMessage(address,string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "publicMessage(address,string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "publicMessage(address,string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "registerAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "registerAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "registerAdmin()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revertReady()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revertReady()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revertReady()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeBndRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeBndRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeBndRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeCakRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeCakRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeCakRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeCstRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeCstRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokeCstRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokePayRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokePayRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "revokePayRole(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCreationDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCreationDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCreationDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCurrency(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCurrency(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCurrency(bytes32)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCurrentCouponDate(uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCurrentCouponDate(uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setCurrentCouponDate(uint256,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setExpectedSupply(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setExpectedSupply(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setExpectedSupply(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIsinSymbol(string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIsinSymbol(string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIsinSymbol(string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIssuanceDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIssuanceDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setIssuanceDate(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setName(string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setName(string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setName(string)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "toggleFrozen()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "toggleFrozen()",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "toggleFrozen()",
+    functionFragment: "totalSupply()",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -6775,6 +5819,961 @@ export interface DiamondInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transfer(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferFrom(address,address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "init", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "addCouponDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addCouponDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addCouponDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addressForNewAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addressForNewAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addressForNewAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "atReturningHash(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "atReturningHash(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "atReturningHash(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfAt(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfCoupon(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfCoupon(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "balanceOfCoupon(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "burn(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeAdminRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeAdminRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "changeAdminRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfCouponDateExists(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfCouponDateExists(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfCouponDateExists(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfMaturityDateExists(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfMaturityDateExists(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkIfMaturityDateExists(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentCouponDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentCouponDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentCouponDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentSnapshotDatetime()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentSnapshotDatetime()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "currentSnapshotDatetime()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decimals()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "decreaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "delCouponDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "delCouponDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "delCouponDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "disableContractFromWhitelist(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "disableContractFromWhitelist(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "disableContractFromWhitelist(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "disableInvestorFromWhitelist(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "disableInvestorFromWhitelist(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "disableInvestorFromWhitelist(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "enableContractToWhitelist(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "enableContractToWhitelist(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "enableContractToWhitelist(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "enableInvestorToWhitelist(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "enableInvestorToWhitelist(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "enableInvestorToWhitelist(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "firstVoterForNewAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "firstVoterForNewAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "firstVoterForNewAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllInvestors()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllInvestors()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllInvestors()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondCouponRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondCouponRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondCouponRate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondData()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondUnitValue()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondUnitValue()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBondUnitValue()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCreationDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCreationDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCreationDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInvestorListAtCoupon(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInvestorListAtCoupon(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getInvestorListAtCoupon(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getIssuanceDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getIssuanceDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getIssuanceDate()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantBndRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantBndRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantBndRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantCakRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantCakRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantCakRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantCstRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantCstRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantCstRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantPayRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantPayRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "grantPayRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "increaseAllowance(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "investorCustodian(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "investorCustodian(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "investorCustodian(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "investorsAllowed(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "investorsAllowed(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "investorsAllowed(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isBnD(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isBnD(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isBnD(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCAK(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCAK(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCAK(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCallerApprovedSmartContract()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCallerApprovedSmartContract()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCallerApprovedSmartContract()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isContractAllowed(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isContractAllowed(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isContractAllowed(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCustodian(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCustodian(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isCustodian(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isPay(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isPay(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "isPay(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "makeReady()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "makeReady()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "makeReady()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mint(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mint(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mint(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "nextSnapshotDatetime()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "nextSnapshotDatetime()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "nextSnapshotDatetime()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "primaryIssuanceAccount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "primaryIssuanceAccount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "primaryIssuanceAccount()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "publicMessage(address,string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "publicMessage(address,string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "publicMessage(address,string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "registerAdmin()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "returnBalanceToPrimaryIssuanceAccount(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revertReady()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revertReady()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revertReady()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeBndRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeBndRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeBndRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeCakRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeCakRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeCakRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeCstRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeCstRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokeCstRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokePayRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokePayRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "revokePayRole(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setBondData(string,uint256,bytes32,uint256,uint256,uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCreationDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCreationDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCreationDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCurrency(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCurrency(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCurrency(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCurrentCouponDate(uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCurrentCouponDate(uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCurrentCouponDate(uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setExpectedSupply(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setExpectedSupply(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setExpectedSupply(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIsinSymbol(string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIsinSymbol(string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIsinSymbol(string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIssuanceDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIssuanceDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIssuanceDate(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setName(string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setName(string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setName(string)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "status()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "symbol()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "toggleFrozen()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "toggleFrozen()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "toggleFrozen()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "totalSupplyAt(uint256)",
     data: BytesLike
   ): Result;
@@ -6816,114 +6815,6 @@ export interface DiamondInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "totalSupplyAtCoupon(uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transfer(address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom(address,address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -8979,35 +8870,12 @@ export namespace OwnershipTransferred_address_address_Event {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
-export namespace Initialized_uint64_Event {
-  export type InputTuple = [version: BigNumberish];
-  export type OutputTuple = [version: bigint];
+export namespace OwnershipTransferred_address_address_Event {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
   export interface OutputObject {
-    version: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Initialized_uint64_Event {
-  export type InputTuple = [version: BigNumberish];
-  export type OutputTuple = [version: bigint];
-  export interface OutputObject {
-    version: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Initialized_uint64_Event {
-  export type InputTuple = [version: BigNumberish];
-  export type OutputTuple = [version: bigint];
-  export interface OutputObject {
-    version: bigint;
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -9545,19 +9413,19 @@ export namespace Initialized_uint64_Event {
 
 export namespace DiamondCut_tuple_array_address_bytes_Event {
   export type InputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStruct[],
-    target: AddressLike,
-    data: BytesLike
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
   ];
   export type OutputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[],
-    target: string,
-    data: string
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
   ];
   export interface OutputObject {
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[];
-    target: string;
-    data: string;
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -9567,19 +9435,19 @@ export namespace DiamondCut_tuple_array_address_bytes_Event {
 
 export namespace DiamondCut_tuple_array_address_bytes_Event {
   export type InputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStruct[],
-    target: AddressLike,
-    data: BytesLike
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
   ];
   export type OutputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[],
-    target: string,
-    data: string
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
   ];
   export interface OutputObject {
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[];
-    target: string;
-    data: string;
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -9589,19 +9457,19 @@ export namespace DiamondCut_tuple_array_address_bytes_Event {
 
 export namespace DiamondCut_tuple_array_address_bytes_Event {
   export type InputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStruct[],
-    target: AddressLike,
-    data: BytesLike
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
   ];
   export type OutputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[],
-    target: string,
-    data: string
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
   ];
   export interface OutputObject {
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[];
-    target: string;
-    data: string;
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -9611,19 +9479,19 @@ export namespace DiamondCut_tuple_array_address_bytes_Event {
 
 export namespace DiamondCut_tuple_array_address_bytes_Event {
   export type InputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStruct[],
-    target: AddressLike,
-    data: BytesLike
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
   ];
   export type OutputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[],
-    target: string,
-    data: string
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
   ];
   export interface OutputObject {
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[];
-    target: string;
-    data: string;
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -9633,19 +9501,19 @@ export namespace DiamondCut_tuple_array_address_bytes_Event {
 
 export namespace DiamondCut_tuple_array_address_bytes_Event {
   export type InputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStruct[],
-    target: AddressLike,
-    data: BytesLike
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
   ];
   export type OutputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[],
-    target: string,
-    data: string
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
   ];
   export interface OutputObject {
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[];
-    target: string;
-    data: string;
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -9653,177 +9521,17 @@ export namespace DiamondCut_tuple_array_address_bytes_Event {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
-export namespace DiamondCut_tuple_array_address_bytes_Event {
+export namespace Approval_address_address_uint256_Event {
   export type InputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStruct[],
-    target: AddressLike,
-    data: BytesLike
+    owner: AddressLike,
+    spender: AddressLike,
+    value: BigNumberish
   ];
-  export type OutputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[],
-    target: string,
-    data: string
-  ];
+  export type OutputTuple = [owner: string, spender: string, value: bigint];
   export interface OutputObject {
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[];
-    target: string;
-    data: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace AdminChanged_address_Event {
-  export type InputTuple = [_addressForNewAdmin: AddressLike];
-  export type OutputTuple = [_addressForNewAdmin: string];
-  export interface OutputObject {
-    _addressForNewAdmin: string;
+    owner: string;
+    spender: string;
+    value: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -10310,6 +10018,666 @@ export namespace Approval_address_address_uint256_Event {
     owner: string;
     approved: string;
     tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    value: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, value: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    value: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace Transfer_address_address_uint256_Event {
+  export type InputTuple = [
+    from: AddressLike,
+    to: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [from: string, to: string, tokenId: bigint];
+  export interface OutputObject {
+    from: string;
+    to: string;
+    tokenId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AdminChanged_address_Event {
+  export type InputTuple = [_addressForNewAdmin: AddressLike];
+  export type OutputTuple = [_addressForNewAdmin: string];
+  export interface OutputObject {
+    _addressForNewAdmin: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -11611,492 +11979,6 @@ export namespace SnapshotTimestampChange_uint256_uint256_uint256_Event {
     couponDate: bigint;
     currentTimestamp: bigint;
     nextTimestamp: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    value: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, value: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    value: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace Transfer_address_address_uint256_Event {
-  export type InputTuple = [
-    from: AddressLike,
-    to: AddressLike,
-    tokenId: BigNumberish
-  ];
-  export type OutputTuple = [from: string, to: string, tokenId: bigint];
-  export interface OutputObject {
-    from: string;
-    to: string;
-    tokenId: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -14377,7 +14259,7 @@ export interface Diamond extends BaseContract {
   >;
 
   "supportsInterface(bytes4)": TypedContractMethod<
-    [interfaceId: BytesLike],
+    [_interfaceId: BytesLike],
     [boolean],
     "view"
   >;
@@ -14557,20 +14439,16 @@ export interface Diamond extends BaseContract {
   >;
 
   "transferOwnership(address)": TypedContractMethod<
-    [account: AddressLike],
+    [_newOwner: AddressLike],
     [void],
     "nonpayable"
   >;
 
   "transferOwnership(address)": TypedContractMethod<
-    [account: AddressLike],
+    [_newOwner: AddressLike],
     [void],
     "nonpayable"
   >;
-
-  "renounceOwnership()": TypedContractMethod<[], [void], "nonpayable">;
-
-  "renounceOwnership()": TypedContractMethod<[], [void], "nonpayable">;
 
   "renounceOwnership()": TypedContractMethod<[], [void], "nonpayable">;
 
@@ -15180,18 +15058,8 @@ export interface Diamond extends BaseContract {
 
   "diamondCut((address,uint8,bytes4[])[],address,bytes)": TypedContractMethod<
     [
-      facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      target: AddressLike,
-      data: BytesLike
-    ],
-    [void],
-    "nonpayable"
-  >;
-
-  "diamondCut((address,uint8,bytes4[])[],address,bytes)": TypedContractMethod<
-    [
-      _facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      _target: AddressLike,
+      _diamondCut: IDiamondCut.FacetCutStruct[],
+      _init: AddressLike,
       _calldata: BytesLike
     ],
     [void],
@@ -15200,38 +15068,16 @@ export interface Diamond extends BaseContract {
 
   "diamondCut((address,uint8,bytes4[])[],address,bytes)": TypedContractMethod<
     [
-      facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      target: AddressLike,
-      data: BytesLike
-    ],
-    [void],
-    "nonpayable"
-  >;
-
-  "diamondCut((address,uint8,bytes4[])[],address,bytes)": TypedContractMethod<
-    [
-      _facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      _target: AddressLike,
+      _diamondCut: IDiamondCut.FacetCutStruct[],
+      _init: AddressLike,
       _calldata: BytesLike
     ],
     [void],
     "nonpayable"
-  >;
-
-  "facetAddress(bytes4)": TypedContractMethod<
-    [selector: BytesLike],
-    [string],
-    "view"
   >;
 
   "facetAddress(bytes4)": TypedContractMethod<
     [_functionSelector: BytesLike],
-    [string],
-    "view"
-  >;
-
-  "facetAddress(bytes4)": TypedContractMethod<
-    [selector: BytesLike],
     [string],
     "view"
   >;
@@ -15245,25 +15091,9 @@ export interface Diamond extends BaseContract {
   "facetAddresses()": TypedContractMethod<[], [string[]], "view">;
 
   "facetAddresses()": TypedContractMethod<[], [string[]], "view">;
-
-  "facetAddresses()": TypedContractMethod<[], [string[]], "view">;
-
-  "facetAddresses()": TypedContractMethod<[], [string[]], "view">;
-
-  "facetFunctionSelectors(address)": TypedContractMethod<
-    [facet: AddressLike],
-    [string[]],
-    "view"
-  >;
 
   "facetFunctionSelectors(address)": TypedContractMethod<
     [_facet: AddressLike],
-    [string[]],
-    "view"
-  >;
-
-  "facetFunctionSelectors(address)": TypedContractMethod<
-    [facet: AddressLike],
     [string[]],
     "view"
   >;
@@ -15286,144 +15116,88 @@ export interface Diamond extends BaseContract {
     "view"
   >;
 
-  "facets()": TypedContractMethod<
-    [],
-    [IDiamondLoupe.FacetStructOutput[]],
+  "allowance(address,address)": TypedContractMethod<
+    [owner: AddressLike, spender: AddressLike],
+    [bigint],
     "view"
   >;
 
-  "facets()": TypedContractMethod<
-    [],
-    [IDiamondLoupe.FacetStructOutput[]],
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
     "view"
   >;
 
-  "getFallbackAddress()": TypedContractMethod<[], [string], "view">;
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
 
-  "getFallbackAddress()": TypedContractMethod<[], [string], "view">;
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
 
-  "getFallbackAddress()": TypedContractMethod<[], [string], "view">;
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
 
-  "getFallbackAddress()": TypedContractMethod<[], [string], "view">;
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
 
-  "setFallbackAddress(address)": TypedContractMethod<
-    [fallbackAddress: AddressLike],
-    [void],
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "allowance(address,address)": TypedContractMethod<
+    [holder: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "approve(address,uint256)": TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
     "nonpayable"
-  >;
-
-  "setFallbackAddress(address)": TypedContractMethod<
-    [fallbackAddress: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-
-  "setFallbackAddress(address)": TypedContractMethod<
-    [fallbackAddress: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-
-  "setFallbackAddress(address)": TypedContractMethod<
-    [fallbackAddress: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-
-  "addCouponDate(uint256)": TypedContractMethod<
-    [date: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
-
-  "addCouponDate(uint256)": TypedContractMethod<
-    [date: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
-
-  "addCouponDate(uint256)": TypedContractMethod<
-    [date: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
-
-  "addressForNewAdmin()": TypedContractMethod<[], [string], "view">;
-
-  "addressForNewAdmin()": TypedContractMethod<[], [string], "view">;
-
-  "addressForNewAdmin()": TypedContractMethod<[], [string], "view">;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "allowance(address,address)": TypedContractMethod<
-    [holder: AddressLike, spender: AddressLike],
-    [bigint],
-    "view"
   >;
 
   "approve(address,uint256)": TypedContractMethod<
@@ -15520,6 +15294,362 @@ export interface Diamond extends BaseContract {
 
   "approve()": TypedContractMethod<[], [bigint], "nonpayable">;
 
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address,uint256)": TypedContractMethod<
+    [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address,uint256)": TypedContractMethod<
+    [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address,uint256)": TypedContractMethod<
+    [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "balanceOf(address)": TypedContractMethod<
+    [account: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply(uint256)": TypedContractMethod<
+    [id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  "totalSupply(uint256)": TypedContractMethod<
+    [id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [to: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [arg0: AddressLike, arg1: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transfer(address,uint256)": TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [from: AddressLike, to: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [from_: AddressLike, to_: AddressLike, amount_: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "payable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "payable"
+  >;
+
+  "transferFrom(address,address,uint256)": TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "payable"
+  >;
+
+  init: TypedContractMethod<[], [void], "nonpayable">;
+
+  "addCouponDate(uint256)": TypedContractMethod<
+    [date: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "addCouponDate(uint256)": TypedContractMethod<
+    [date: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "addCouponDate(uint256)": TypedContractMethod<
+    [date: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  "addressForNewAdmin()": TypedContractMethod<[], [string], "view">;
+
+  "addressForNewAdmin()": TypedContractMethod<[], [string], "view">;
+
+  "addressForNewAdmin()": TypedContractMethod<[], [string], "view">;
+
   "atReturningHash(address)": TypedContractMethod<
     [addr: AddressLike],
     [string],
@@ -15535,114 +15665,6 @@ export interface Diamond extends BaseContract {
   "atReturningHash(address)": TypedContractMethod<
     [addr_: AddressLike],
     [string],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address,uint256)": TypedContractMethod<
-    [account: AddressLike, id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address,uint256)": TypedContractMethod<
-    [account: AddressLike, id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address,uint256)": TypedContractMethod<
-    [account: AddressLike, id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
-    "view"
-  >;
-
-  "balanceOf(address)": TypedContractMethod<
-    [account: AddressLike],
-    [bigint],
     "view"
   >;
 
@@ -16703,46 +16725,6 @@ export interface Diamond extends BaseContract {
 
   "toggleFrozen()": TypedContractMethod<[], [void], "nonpayable">;
 
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply(uint256)": TypedContractMethod<
-    [id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-
-  "totalSupply(uint256)": TypedContractMethod<
-    [id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
-  "totalSupply()": TypedContractMethod<[], [bigint], "view">;
-
   "totalSupplyAt(uint256)": TypedContractMethod<
     [snapshotId: BigNumberish],
     [bigint],
@@ -16807,168 +16789,6 @@ export interface Diamond extends BaseContract {
     [_couponDate: BigNumberish],
     [bigint],
     "view"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [arg0: AddressLike, arg1: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transfer(address,uint256)": TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [from_: AddressLike, to_: AddressLike, amount_: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
-    [void],
-    "payable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
-    [void],
-    "payable"
-  >;
-
-  "transferFrom(address,address,uint256)": TypedContractMethod<
-    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
-    [void],
-    "payable"
   >;
 
   "votesForNewAdmin()": TypedContractMethod<[], [bigint], "view">;
@@ -18535,7 +18355,7 @@ export interface Diamond extends BaseContract {
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "supportsInterface(bytes4)"
-  ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  ): TypedContractMethod<[_interfaceId: BytesLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "supportsInterface(bytes4)"
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
@@ -18667,16 +18487,10 @@ export interface Diamond extends BaseContract {
   ): TypedContractMethod<[account: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "transferOwnership(address)"
-  ): TypedContractMethod<[account: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<[_newOwner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "transferOwnership(address)"
-  ): TypedContractMethod<[account: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "renounceOwnership()"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "renounceOwnership()"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+  ): TypedContractMethod<[_newOwner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "renounceOwnership()"
   ): TypedContractMethod<[], [void], "nonpayable">;
@@ -19206,19 +19020,8 @@ export interface Diamond extends BaseContract {
     nameOrSignature: "diamondCut((address,uint8,bytes4[])[],address,bytes)"
   ): TypedContractMethod<
     [
-      facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      target: AddressLike,
-      data: BytesLike
-    ],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "diamondCut((address,uint8,bytes4[])[],address,bytes)"
-  ): TypedContractMethod<
-    [
-      _facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      _target: AddressLike,
+      _diamondCut: IDiamondCut.FacetCutStruct[],
+      _init: AddressLike,
       _calldata: BytesLike
     ],
     [void],
@@ -19228,33 +19031,16 @@ export interface Diamond extends BaseContract {
     nameOrSignature: "diamondCut((address,uint8,bytes4[])[],address,bytes)"
   ): TypedContractMethod<
     [
-      facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      target: AddressLike,
-      data: BytesLike
-    ],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "diamondCut((address,uint8,bytes4[])[],address,bytes)"
-  ): TypedContractMethod<
-    [
-      _facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      _target: AddressLike,
+      _diamondCut: IDiamondCut.FacetCutStruct[],
+      _init: AddressLike,
       _calldata: BytesLike
     ],
     [void],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "facetAddress(bytes4)"
-  ): TypedContractMethod<[selector: BytesLike], [string], "view">;
   getFunction(
     nameOrSignature: "facetAddress(bytes4)"
   ): TypedContractMethod<[_functionSelector: BytesLike], [string], "view">;
-  getFunction(
-    nameOrSignature: "facetAddress(bytes4)"
-  ): TypedContractMethod<[selector: BytesLike], [string], "view">;
   getFunction(
     nameOrSignature: "facetAddress(bytes4)"
   ): TypedContractMethod<[_functionSelector: BytesLike], [string], "view">;
@@ -19265,20 +19051,8 @@ export interface Diamond extends BaseContract {
     nameOrSignature: "facetAddresses()"
   ): TypedContractMethod<[], [string[]], "view">;
   getFunction(
-    nameOrSignature: "facetAddresses()"
-  ): TypedContractMethod<[], [string[]], "view">;
-  getFunction(
-    nameOrSignature: "facetAddresses()"
-  ): TypedContractMethod<[], [string[]], "view">;
-  getFunction(
-    nameOrSignature: "facetFunctionSelectors(address)"
-  ): TypedContractMethod<[facet: AddressLike], [string[]], "view">;
-  getFunction(
     nameOrSignature: "facetFunctionSelectors(address)"
   ): TypedContractMethod<[_facet: AddressLike], [string[]], "view">;
-  getFunction(
-    nameOrSignature: "facetFunctionSelectors(address)"
-  ): TypedContractMethod<[facet: AddressLike], [string[]], "view">;
   getFunction(
     nameOrSignature: "facetFunctionSelectors(address)"
   ): TypedContractMethod<[_facet: AddressLike], [string[]], "view">;
@@ -19289,53 +19063,12 @@ export interface Diamond extends BaseContract {
     nameOrSignature: "facets()"
   ): TypedContractMethod<[], [IDiamondLoupe.FacetStructOutput[]], "view">;
   getFunction(
-    nameOrSignature: "facets()"
-  ): TypedContractMethod<[], [IDiamondLoupe.FacetStructOutput[]], "view">;
-  getFunction(
-    nameOrSignature: "facets()"
-  ): TypedContractMethod<[], [IDiamondLoupe.FacetStructOutput[]], "view">;
-  getFunction(
-    nameOrSignature: "getFallbackAddress()"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "getFallbackAddress()"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "getFallbackAddress()"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "getFallbackAddress()"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "setFallbackAddress(address)"
-  ): TypedContractMethod<[fallbackAddress: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setFallbackAddress(address)"
-  ): TypedContractMethod<[fallbackAddress: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setFallbackAddress(address)"
-  ): TypedContractMethod<[fallbackAddress: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setFallbackAddress(address)"
-  ): TypedContractMethod<[fallbackAddress: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "addCouponDate(uint256)"
-  ): TypedContractMethod<[date: BigNumberish], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "addCouponDate(uint256)"
-  ): TypedContractMethod<[date: BigNumberish], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "addCouponDate(uint256)"
-  ): TypedContractMethod<[date: BigNumberish], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "addressForNewAdmin()"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "addressForNewAdmin()"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "addressForNewAdmin()"
-  ): TypedContractMethod<[], [string], "view">;
+    nameOrSignature: "allowance(address,address)"
+  ): TypedContractMethod<
+    [owner: AddressLike, spender: AddressLike],
+    [bigint],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "allowance(address,address)"
   ): TypedContractMethod<
@@ -19419,6 +19152,13 @@ export interface Diamond extends BaseContract {
     [holder: AddressLike, spender: AddressLike],
     [bigint],
     "view"
+  >;
+  getFunction(
+    nameOrSignature: "approve(address,uint256)"
+  ): TypedContractMethod<
+    [spender: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
   >;
   getFunction(
     nameOrSignature: "approve(address,uint256)"
@@ -19532,6 +19272,350 @@ export interface Diamond extends BaseContract {
     nameOrSignature: "approve()"
   ): TypedContractMethod<[], [bigint], "nonpayable">;
   getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address,uint256)"
+  ): TypedContractMethod<
+    [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "balanceOf(address,uint256)"
+  ): TypedContractMethod<
+    [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "balanceOf(address,uint256)"
+  ): TypedContractMethod<
+    [account: AddressLike, id: BigNumberish],
+    [bigint],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "balanceOf(address)"
+  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply(uint256)"
+  ): TypedContractMethod<[id: BigNumberish], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply(uint256)"
+  ): TypedContractMethod<[id: BigNumberish], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalSupply()"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [to: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [arg0: AddressLike, arg1: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transfer(address,uint256)"
+  ): TypedContractMethod<
+    [recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [from: AddressLike, to: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [from_: AddressLike, to_: AddressLike, amount_: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "payable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "payable"
+  >;
+  getFunction(
+    nameOrSignature: "transferFrom(address,address,uint256)"
+  ): TypedContractMethod<
+    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "payable"
+  >;
+  getFunction(
+    nameOrSignature: "init"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "addCouponDate(uint256)"
+  ): TypedContractMethod<[date: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "addCouponDate(uint256)"
+  ): TypedContractMethod<[date: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "addCouponDate(uint256)"
+  ): TypedContractMethod<[date: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "addressForNewAdmin()"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "addressForNewAdmin()"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "addressForNewAdmin()"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "atReturningHash(address)"
   ): TypedContractMethod<[addr: AddressLike], [string], "view">;
   getFunction(
@@ -19540,72 +19624,6 @@ export interface Diamond extends BaseContract {
   getFunction(
     nameOrSignature: "atReturningHash(address)"
   ): TypedContractMethod<[addr_: AddressLike], [string], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address,uint256)"
-  ): TypedContractMethod<
-    [account: AddressLike, id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "balanceOf(address,uint256)"
-  ): TypedContractMethod<
-    [account: AddressLike, id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "balanceOf(address,uint256)"
-  ): TypedContractMethod<
-    [account: AddressLike, id: BigNumberish],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "balanceOf(address)"
-  ): TypedContractMethod<[account: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "balanceOfAt(address,uint256)"
   ): TypedContractMethod<
@@ -20509,54 +20527,6 @@ export interface Diamond extends BaseContract {
     nameOrSignature: "toggleFrozen()"
   ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply(uint256)"
-  ): TypedContractMethod<[id: BigNumberish], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply(uint256)"
-  ): TypedContractMethod<[id: BigNumberish], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalSupply()"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
     nameOrSignature: "totalSupplyAt(uint256)"
   ): TypedContractMethod<[snapshotId: BigNumberish], [bigint], "view">;
   getFunction(
@@ -20589,195 +20559,6 @@ export interface Diamond extends BaseContract {
   getFunction(
     nameOrSignature: "totalSupplyAtCoupon(uint256)"
   ): TypedContractMethod<[_couponDate: BigNumberish], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [arg0: AddressLike, arg1: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transfer(address,uint256)"
-  ): TypedContractMethod<
-    [recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [from_: AddressLike, to_: AddressLike, amount_: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [holder: AddressLike, recipient: AddressLike, amount: BigNumberish],
-    [boolean],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
-    [void],
-    "payable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
-    [void],
-    "payable"
-  >;
-  getFunction(
-    nameOrSignature: "transferFrom(address,address,uint256)"
-  ): TypedContractMethod<
-    [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
-    [void],
-    "payable"
-  >;
   getFunction(
     nameOrSignature: "votesForNewAdmin()"
   ): TypedContractMethod<[], [bigint], "view">;
@@ -22367,25 +22148,11 @@ export interface Diamond extends BaseContract {
     OwnershipTransferred_address_address_Event.OutputObject
   >;
   getEvent(
-    key: "Initialized(uint64)"
+    key: "OwnershipTransferred(address,address)"
   ): TypedContractEvent<
-    Initialized_uint64_Event.InputTuple,
-    Initialized_uint64_Event.OutputTuple,
-    Initialized_uint64_Event.OutputObject
-  >;
-  getEvent(
-    key: "Initialized(uint64)"
-  ): TypedContractEvent<
-    Initialized_uint64_Event.InputTuple,
-    Initialized_uint64_Event.OutputTuple,
-    Initialized_uint64_Event.OutputObject
-  >;
-  getEvent(
-    key: "Initialized(uint64)"
-  ): TypedContractEvent<
-    Initialized_uint64_Event.InputTuple,
-    Initialized_uint64_Event.OutputTuple,
-    Initialized_uint64_Event.OutputObject
+    OwnershipTransferred_address_address_Event.InputTuple,
+    OwnershipTransferred_address_address_Event.OutputTuple,
+    OwnershipTransferred_address_address_Event.OutputObject
   >;
   getEvent(
     key: "Initialized(uint64)"
@@ -22731,11 +22498,396 @@ export interface Diamond extends BaseContract {
     DiamondCut_tuple_array_address_bytes_Event.OutputObject
   >;
   getEvent(
-    key: "DiamondCut(tuple[],address,bytes)"
+    key: "Approval(address,address,uint256)"
   ): TypedContractEvent<
-    DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-    DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-    DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Approval(address,address,uint256)"
+  ): TypedContractEvent<
+    Approval_address_address_uint256_Event.InputTuple,
+    Approval_address_address_uint256_Event.OutputTuple,
+    Approval_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
+  >;
+  getEvent(
+    key: "Transfer(address,address,uint256)"
+  ): TypedContractEvent<
+    Transfer_address_address_uint256_Event.InputTuple,
+    Transfer_address_address_uint256_Event.OutputTuple,
+    Transfer_address_address_uint256_Event.OutputObject
   >;
   getEvent(
     key: "AdminChanged(address)"
@@ -22827,195 +22979,6 @@ export interface Diamond extends BaseContract {
     AdminChanged_address_Event.InputTuple,
     AdminChanged_address_Event.OutputTuple,
     AdminChanged_address_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Approval(address,address,uint256)"
-  ): TypedContractEvent<
-    Approval_address_address_uint256_Event.InputTuple,
-    Approval_address_address_uint256_Event.OutputTuple,
-    Approval_address_address_uint256_Event.OutputObject
   >;
   getEvent(
     key: "AssetHTLC(bytes32,address,address,bytes32,uint8)"
@@ -23583,195 +23546,6 @@ export interface Diamond extends BaseContract {
     SnapshotTimestampChange_uint256_uint256_uint256_Event.InputTuple,
     SnapshotTimestampChange_uint256_uint256_uint256_Event.OutputTuple,
     SnapshotTimestampChange_uint256_uint256_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
-  >;
-  getEvent(
-    key: "Transfer(address,address,uint256)"
-  ): TypedContractEvent<
-    Transfer_address_address_uint256_Event.InputTuple,
-    Transfer_address_address_uint256_Event.OutputTuple,
-    Transfer_address_address_uint256_Event.OutputObject
   >;
   getEvent(
     key: "WalletAddedToWhitelist(address)"
@@ -24719,20 +24493,10 @@ export interface Diamond extends BaseContract {
       OwnershipTransferred_address_address_Event.OutputTuple,
       OwnershipTransferred_address_address_Event.OutputObject
     >;
-    "Initialized(uint64)": TypedContractEvent<
-      Initialized_uint64_Event.InputTuple,
-      Initialized_uint64_Event.OutputTuple,
-      Initialized_uint64_Event.OutputObject
-    >;
-    "Initialized(uint64)": TypedContractEvent<
-      Initialized_uint64_Event.InputTuple,
-      Initialized_uint64_Event.OutputTuple,
-      Initialized_uint64_Event.OutputObject
-    >;
-    "Initialized(uint64)": TypedContractEvent<
-      Initialized_uint64_Event.InputTuple,
-      Initialized_uint64_Event.OutputTuple,
-      Initialized_uint64_Event.OutputObject
+    "OwnershipTransferred(address,address)": TypedContractEvent<
+      OwnershipTransferred_address_address_Event.InputTuple,
+      OwnershipTransferred_address_address_Event.OutputTuple,
+      OwnershipTransferred_address_address_Event.OutputObject
     >;
     "Initialized(uint64)": TypedContractEvent<
       Initialized_uint64_Event.InputTuple,
@@ -24979,10 +24743,285 @@ export interface Diamond extends BaseContract {
       DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
       DiamondCut_tuple_array_address_bytes_Event.OutputObject
     >;
-    "DiamondCut(tuple[],address,bytes)": TypedContractEvent<
-      DiamondCut_tuple_array_address_bytes_Event.InputTuple,
-      DiamondCut_tuple_array_address_bytes_Event.OutputTuple,
-      DiamondCut_tuple_array_address_bytes_Event.OutputObject
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Approval(address,address,uint256)": TypedContractEvent<
+      Approval_address_address_uint256_Event.InputTuple,
+      Approval_address_address_uint256_Event.OutputTuple,
+      Approval_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
+    >;
+    "Transfer(address,address,uint256)": TypedContractEvent<
+      Transfer_address_address_uint256_Event.InputTuple,
+      Transfer_address_address_uint256_Event.OutputTuple,
+      Transfer_address_address_uint256_Event.OutputObject
     >;
     "AdminChanged(address)": TypedContractEvent<
       AdminChanged_address_Event.InputTuple,
@@ -25048,141 +25087,6 @@ export interface Diamond extends BaseContract {
       AdminChanged_address_Event.InputTuple,
       AdminChanged_address_Event.OutputTuple,
       AdminChanged_address_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
-    >;
-    "Approval(address,address,uint256)": TypedContractEvent<
-      Approval_address_address_uint256_Event.InputTuple,
-      Approval_address_address_uint256_Event.OutputTuple,
-      Approval_address_address_uint256_Event.OutputObject
     >;
     "AssetHTLC(bytes32,address,address,bytes32,uint8)": TypedContractEvent<
       AssetHTLC_bytes32_address_address_bytes32_uint8_Event.InputTuple,
@@ -25588,141 +25492,6 @@ export interface Diamond extends BaseContract {
       SnapshotTimestampChange_uint256_uint256_uint256_Event.InputTuple,
       SnapshotTimestampChange_uint256_uint256_uint256_Event.OutputTuple,
       SnapshotTimestampChange_uint256_uint256_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
-    >;
-    "Transfer(address,address,uint256)": TypedContractEvent<
-      Transfer_address_address_uint256_Event.InputTuple,
-      Transfer_address_address_uint256_Event.OutputTuple,
-      Transfer_address_address_uint256_Event.OutputObject
     >;
     "WalletAddedToWhitelist(address)": TypedContractEvent<
       WalletAddedToWhitelist_address_Event.InputTuple,

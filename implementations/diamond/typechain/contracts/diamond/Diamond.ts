@@ -6,7 +6,6 @@ import type {
   BigNumberish,
   BytesLike,
   FunctionFragment,
-  Result,
   Interface,
   EventFragment,
   AddressLike,
@@ -20,158 +19,43 @@ import type {
   TypedEventLog,
   TypedLogDescription,
   TypedListener,
-  TypedContractMethod,
 } from "../../common";
 
-export declare namespace IDiamondCutInternal {
+export declare namespace IDiamondCut {
   export type FacetCutStruct = {
-    target: AddressLike;
+    facetAddress: AddressLike;
     action: BigNumberish;
-    selectors: BytesLike[];
+    functionSelectors: BytesLike[];
   };
 
   export type FacetCutStructOutput = [
-    target: string,
+    facetAddress: string,
     action: bigint,
-    selectors: string[]
-  ] & { target: string; action: bigint; selectors: string[] };
-}
-
-export declare namespace IDiamondLoupe {
-  export type FacetStruct = { target: AddressLike; selectors: BytesLike[] };
-
-  export type FacetStructOutput = [target: string, selectors: string[]] & {
-    target: string;
-    selectors: string[];
-  };
+    functionSelectors: string[]
+  ] & { facetAddress: string; action: bigint; functionSelectors: string[] };
 }
 
 export interface DiamondInterface extends Interface {
-  getFunction(
-    nameOrSignature:
-      | "diamondCut"
-      | "facetAddress"
-      | "facetAddresses"
-      | "facetFunctionSelectors"
-      | "facets"
-      | "getFallbackAddress"
-      | "owner"
-      | "renounceOwnership"
-      | "setFallbackAddress"
-      | "supportsInterface"
-      | "transferOwnership"
-  ): FunctionFragment;
-
   getEvent(
-    nameOrSignatureOrTopic:
-      | "DiamondCut"
-      | "Initialized"
-      | "OwnershipTransferred"
+    nameOrSignatureOrTopic: "DiamondCut" | "OwnershipTransferred"
   ): EventFragment;
-
-  encodeFunctionData(
-    functionFragment: "diamondCut",
-    values: [IDiamondCutInternal.FacetCutStruct[], AddressLike, BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetAddress",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetAddresses",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "facetFunctionSelectors",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(functionFragment: "facets", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "getFallbackAddress",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFallbackAddress",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "supportsInterface",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
-
-  decodeFunctionResult(functionFragment: "diamondCut", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "facetAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetAddresses",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "facetFunctionSelectors",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "facets", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getFallbackAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setFallbackAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "supportsInterface",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
 }
 
 export namespace DiamondCutEvent {
   export type InputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStruct[],
-    target: AddressLike,
-    data: BytesLike
+    _diamondCut: IDiamondCut.FacetCutStruct[],
+    _init: AddressLike,
+    _calldata: BytesLike
   ];
   export type OutputTuple = [
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[],
-    target: string,
-    data: string
+    _diamondCut: IDiamondCut.FacetCutStructOutput[],
+    _init: string,
+    _calldata: string
   ];
   export interface OutputObject {
-    facetCuts: IDiamondCutInternal.FacetCutStructOutput[];
-    target: string;
-    data: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace InitializedEvent {
-  export type InputTuple = [version: BigNumberish];
-  export type OutputTuple = [version: bigint];
-  export interface OutputObject {
-    version: bigint;
+    _diamondCut: IDiamondCut.FacetCutStructOutput[];
+    _init: string;
+    _calldata: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -235,97 +119,9 @@ export interface Diamond extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  diamondCut: TypedContractMethod<
-    [
-      facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      target: AddressLike,
-      data: BytesLike
-    ],
-    [void],
-    "nonpayable"
-  >;
-
-  facetAddress: TypedContractMethod<[selector: BytesLike], [string], "view">;
-
-  facetAddresses: TypedContractMethod<[], [string[]], "view">;
-
-  facetFunctionSelectors: TypedContractMethod<
-    [facet: AddressLike],
-    [string[]],
-    "view"
-  >;
-
-  facets: TypedContractMethod<[], [IDiamondLoupe.FacetStructOutput[]], "view">;
-
-  getFallbackAddress: TypedContractMethod<[], [string], "view">;
-
-  owner: TypedContractMethod<[], [string], "view">;
-
-  renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
-
-  setFallbackAddress: TypedContractMethod<
-    [fallbackAddress: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-
-  supportsInterface: TypedContractMethod<
-    [interfaceId: BytesLike],
-    [boolean],
-    "view"
-  >;
-
-  transferOwnership: TypedContractMethod<
-    [account: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
-
-  getFunction(
-    nameOrSignature: "diamondCut"
-  ): TypedContractMethod<
-    [
-      facetCuts: IDiamondCutInternal.FacetCutStruct[],
-      target: AddressLike,
-      data: BytesLike
-    ],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "facetAddress"
-  ): TypedContractMethod<[selector: BytesLike], [string], "view">;
-  getFunction(
-    nameOrSignature: "facetAddresses"
-  ): TypedContractMethod<[], [string[]], "view">;
-  getFunction(
-    nameOrSignature: "facetFunctionSelectors"
-  ): TypedContractMethod<[facet: AddressLike], [string[]], "view">;
-  getFunction(
-    nameOrSignature: "facets"
-  ): TypedContractMethod<[], [IDiamondLoupe.FacetStructOutput[]], "view">;
-  getFunction(
-    nameOrSignature: "getFallbackAddress"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setFallbackAddress"
-  ): TypedContractMethod<[fallbackAddress: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "supportsInterface"
-  ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[account: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "DiamondCut"
@@ -333,13 +129,6 @@ export interface Diamond extends BaseContract {
     DiamondCutEvent.InputTuple,
     DiamondCutEvent.OutputTuple,
     DiamondCutEvent.OutputObject
-  >;
-  getEvent(
-    key: "Initialized"
-  ): TypedContractEvent<
-    InitializedEvent.InputTuple,
-    InitializedEvent.OutputTuple,
-    InitializedEvent.OutputObject
   >;
   getEvent(
     key: "OwnershipTransferred"
@@ -359,17 +148,6 @@ export interface Diamond extends BaseContract {
       DiamondCutEvent.InputTuple,
       DiamondCutEvent.OutputTuple,
       DiamondCutEvent.OutputObject
-    >;
-
-    "Initialized(uint64)": TypedContractEvent<
-      InitializedEvent.InputTuple,
-      InitializedEvent.OutputTuple,
-      InitializedEvent.OutputObject
-    >;
-    Initialized: TypedContractEvent<
-      InitializedEvent.InputTuple,
-      InitializedEvent.OutputTuple,
-      InitializedEvent.OutputObject
     >;
 
     "OwnershipTransferred(address,address)": TypedContractEvent<

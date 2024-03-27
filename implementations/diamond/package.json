@@ -12,7 +12,7 @@
     "size": "pnpm exec hardhat size-contracts",
     "size:no-compile": "pnpm exec hardhat size-contracts --no-compile",
     "test": "pnpm exec hardhat test",
-    "deploy": "pnpm exec hardhat run --network",
+    "deploy:local": "pnpm exec hardhat run --network hardhat scripts/deploy.ts",
     "wallet": "pnpm exec hardhat wallet",
     "generate": "pnpm exec hardhat generate",
     "prettier": "prettier --write --plugin=prettier-plugin-solidity 'contracts/**/*.sol'"
