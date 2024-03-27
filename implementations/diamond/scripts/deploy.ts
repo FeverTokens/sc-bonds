@@ -8,6 +8,7 @@ import { deployDiamond } from './deployDiamond';
 
 async function main() {
 
+    
     // Assuming you have a signer or provider set up in your Hardhat environment
     const signer = await hre.ethers.provider.getSigner();
     const contractOwner = await signer.getAddress();

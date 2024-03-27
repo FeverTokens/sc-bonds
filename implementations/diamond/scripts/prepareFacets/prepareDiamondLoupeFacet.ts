@@ -7,18 +7,21 @@ export async function prepareDiamondLoupeFacet(contractOwner: string): Promise<a
     try {
         // Deploy the contract and get the contract instance
         const facet = await DiamondLoupeFacet.deploy();
+        const facetContract = await facet.waitForDeployment();
+        // console.log(facetContract);
+        const facetAddress = await facetContract.getAddress();
         // The contract instance is ready to use, so no need to wait for the transaction
-        console.log(`DiamondLoupeFacet deployed: ${facet.address}`);
+        console.log(`DiamondLoupeFacet deployed: ${facetAddress}`);
 
         // Check if the facet address is correctly retrieved
-        if (!facet.address) {
+        if (!facetAddress) {
             throw new Error("Failed to retrieve the deployed contract address.");
         }
 
         const selectors = getSelectors({ abi: facet.interface.fragments });
         const cut = {
             action: FacetCutAction.Add,
-            facetAddress: facet.address,
+            facetAddress: facetAddress,
             functionSelectors: selectors,
         };
         return cut;

@@ -23,27 +23,33 @@ export async function deployDiamond(cut: FacetCut[]): Promise<void> {
 
     // Deploy DiamondCutFacet
     const DiamondCutFacet = await hre.ethers.getContractFactory("DiamondCutFacet");
-    const diamondCutFacet = await DiamondCutFacet.deploy();
-    await diamondCutFacet.deployed();
-    console.log("DiamondCutFacet deployed:", diamondCutFacet.address);
+
+     // Deploy the contract and get the contract instance
+     const diamondCutFacet = await DiamondCutFacet.deploy();
+     const diamondCutContract = await diamondCutFacet.waitForDeployment();
+     const diamondCutAddress = await diamondCutContract.getAddress();
+     console.log(`DiamondCutFacet deployed: ${diamondCutAddress}`);
 
     // Deploy DiamondInit
     const DiamondInit = await hre.ethers.getContractFactory("DiamondInit");
     const diamondInit = await DiamondInit.deploy();
-    await diamondInit.deployed();
-    console.log("DiamondInit deployed:", diamondInit.address);
+    const diamondInitContract = await diamondInit.waitForDeployment();
+    const diamondInitAddress = await diamondInitContract.getAddress();
+    console.log(`DiamondInit deployed: ${diamondInitAddress}`);
 
     // Deploy Diamond
     const Diamond = await hre.ethers.getContractFactory("Diamond");
     const diamond = await Diamond.deploy(
         contractOwner,
         diamondCutFacet.address,
-        cut[0].facetAddress, // Assuming this is the ERC20Facet address
+        cut[0].facetAddress, 
         "0xe4476Ca098Fa209ea457c390BB24A8cfe90FCac4" // Replaced placeholder with actual value
     );
-    await diamond.deployed();
-    console.log("Diamond deployed:", diamond.address);
-    const contractAddress = diamond.address; // Corrected line
+    const diamondContract = await diamond.waitForDeployment();
+    const diamondAddress = await diamondContract.getAddress();
+    console.log(`Diamond deployed: ${diamondAddress}`);
+  
+    // const contractAddress = diamond.address; // Corrected line
     
     // Load ABIs
     const diamondCutAbi = JSON.parse(readFileSync(join(__dirname, '../artifacts/contracts/diamond/interfaces/IDiamondCut.sol/IDiamondCut.json'), 'utf8')).abi;  
@@ -62,7 +68,7 @@ export async function deployDiamond(cut: FacetCut[]): Promise<void> {
         try {
             const diamondCutTx = await diamond.diamondCut(
                 [facetCut],
-                diamondInit.address,
+                diamondInitAddress,
                 functionCall
             );
             const diamondCutTxHash = diamondCutTx.hash;
@@ -74,5 +80,5 @@ export async function deployDiamond(cut: FacetCut[]): Promise<void> {
     }
 
     console.log("Diamond deployment completed.");
-    console.log(typeof diamond.address); // Should log 'string'
+    console.log(typeof diamondAddress); 
 }

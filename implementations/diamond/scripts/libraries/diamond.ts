@@ -1,10 +1,14 @@
-import utils  from 'ethers';
+// import utils  from 'ethers';
+import hre from "hardhat";
+
+// import ethers from 'ethers';
 
 export const FacetCutAction = { Add: 0, Replace: 1, Remove: 2 };
 
 // Function to get the sighash of a function signature
 function getSighash(func: string) {
-    const sighash = utils.keccak256(utils.toUtf8Bytes(func));
+    const sighash = hre.ethers.keccak256(hre.ethers.toUtf8Bytes(func));
+    // const sighash = ethers.id(func);
     return sighash;
 }
 
