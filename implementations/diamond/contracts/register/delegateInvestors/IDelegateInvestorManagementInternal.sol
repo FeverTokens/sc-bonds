@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // FeverTokens Contracts v1.0.0
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 interface IDelegateInvestorManagementInternal {
     // Define structs, enums, events and errors used internally in the contract

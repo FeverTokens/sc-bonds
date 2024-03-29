@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // FeverTokens Contracts v1.0.0
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 import { IERC165Internal } from "./IERC165Internal.sol";
 import { ERC165Storage } from "./ERC165Storage.sol";

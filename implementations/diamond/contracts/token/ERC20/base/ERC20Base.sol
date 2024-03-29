@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // FeverTokens Contracts v1.0.0
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 import { IERC20 } from "../IERC20.sol"; /// @dev this is required to inherit documentation only
 import { IERC20Base } from "./IERC20Base.sol";

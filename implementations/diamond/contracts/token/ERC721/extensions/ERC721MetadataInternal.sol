@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // FeverTokens Contracts v1.0.0
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 import { IERC721MetadataInternal } from "./IERC721MetadataInternal.sol";
 import { ERC721BaseInternal } from "../base/ERC721Base.sol";

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // FeverTokens Contracts v1.0.0
 
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.17;
 
 import { ERC2771Context } from "../metatx/ERC2771Context.sol";
 import { Initializable } from "../initializable/Initializable.sol";
