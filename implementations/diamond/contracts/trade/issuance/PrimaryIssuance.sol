@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
-// FeverTokens Contracts v1.0.0
 
-pragma solidity ^0.8.17;
+pragma solidity 0.8.17;
 
-import { IPrimaryIssuance, ITrade } from "./IPrimaryIssuance.sol";
-import { IRegister } from "../../register/IRegister.sol";
-import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "./IPrimaryIssuance.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract PrimaryIssuance is IPrimaryIssuance, ReentrancyGuard {
     IRegister public register;
@@ -73,8 +72,10 @@ contract PrimaryIssuance is IPrimaryIssuance, ReentrancyGuard {
                 ),
                 "the transfer has failed"
             );
+
             //TODO: maybe replace that unexplicit "the transfer has failed" message
             __status = Status.Accepted;
+
             emit NotifyTrade(
                 register.primaryIssuanceAccount(),
                 account,

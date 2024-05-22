@@ -3,9 +3,9 @@
 
 pragma solidity ^0.8.17;
 
-import { ICouponSnapshotManagement } from "./ICouponSnapshotManagement.sol";
-import { CouponSnapshotManagementInternal, ERC20Metadata } from "./CouponSnapshotManagementInternal.sol";
-import { IERC20, IERC20Base, ERC20Base } from "../../token/ERC20/base/ERC20Base.sol";
+import {ICouponSnapshotManagement} from "./ICouponSnapshotManagement.sol";
+import {CouponSnapshotManagementInternal} from "./CouponSnapshotManagementInternal.sol";
+import {IERC20, IERC20Base, ERC20Base} from "../../token/ERC20/base/ERC20Base.sol";
 
 contract CouponSnapshotManagement is
     ICouponSnapshotManagement,
@@ -118,37 +118,73 @@ contract CouponSnapshotManagement is
     }
 
     /**
-     * @dev The aim of this function is to enable the CAK to mint some bond units
+     * @inheritdoc ICouponSnapshotManagement
+     */
+    function returnBalanceToPrimaryIssuanceAccount(
+        address investor
+    ) public override returns (bool) {
+        return _returnBalanceToPrimaryIssuanceAccount(investor);
+    }
+
+    /**
+     * @inheritdoc ICouponSnapshotManagement
      */
     function mint(uint256 amount_) public {
         _mint(amount_);
     }
 
+    /**
+     * @inheritdoc ICouponSnapshotManagement
+     */
     function burn(uint256 amount_) public {
-        _burn(_msgSender(), amount_);
+        _burn(amount_);
     }
 
+    /**
+     * @inheritdoc ICouponSnapshotManagement
+     */
     function lock(
         address from,
         address to,
         uint256 amount,
-        bytes32 txId,
-        bytes32 hL,
-        bytes32 hR,
-        bytes32 hC,
-        uint256 pDate,
-        uint256 dDate,
+        bytes32 transactionId,
+        bytes32 hashLock,
+        bytes32 hashRelease,
+        bytes32 hashCancel,
+        uint256 paymentDate,
+        uint256 deliveryDate,
         bytes32 proof
     ) public {
-        _lock(from, to, amount, txId, hL, hR, hC, pDate, dDate, proof);
+        _lock(
+            from,
+            to,
+            amount,
+            transactionId,
+            hashLock,
+            hashRelease,
+            hashCancel,
+            paymentDate,
+            deliveryDate,
+            proof
+        );
     }
 
+    /**
+     * @inheritdoc ICouponSnapshotManagement
+     */
     function release(
-        bytes32 txId,
+        bytes32 transactionId,
         bytes32 secret,
         bytes32 proof,
-        LStatus status_
+        LockStatus status_
     ) public {
-        _release(txId, secret, proof, status_);
+        _release(transactionId, secret, proof, status_);
+    }
+
+    /**
+     * @inheritdoc ICouponSnapshotManagement
+     */
+    function getLock(bytes32 transactionId) public view returns (Lock memory) {
+        return _getLock(transactionId);
     }
 }

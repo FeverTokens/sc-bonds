@@ -3,49 +3,24 @@
 
 pragma solidity ^0.8.17;
 
-import { ICouponSnapshotManagementInternal } from "./ICouponSnapshotManagementInternal.sol";
-import { IRegisterMetadataInternal } from "../metadata/IRegisterMetadataInternal.sol";
-import { RegisterRoleManagementInternal } from "../role/RegisterRoleManagementInternal.sol";
-import { SmartContractAccessManagementInternal } from "../access/SmartContractAccessManagementInternal.sol";
-import { InvestorManagementInternal } from "../investors/InvestorManagementInternal.sol";
-import { ERC20Snapshot } from "../../token/ERC20/extensions/ERC20Snapshot.sol";
-import { ERC20Metadata } from "../../token/ERC20/extensions/ERC20Metadata.sol";
-import { CouponSnapshotManagementStorage } from "./CouponSnapshotManagementStorage.sol";
-import { RegisterMetadataStorage } from "../metadata/RegisterMetadataStorage.sol";
-import { InvestorManagementStorage } from "../investors/InvestorManagementStorage.sol";
-import { ERC2771ContextInternal } from "../../metatx/ERC2771ContextInternal.sol";
-import { ContextInternal } from "../../metatx/ContextInternal.sol";
+import {ICouponSnapshotManagementInternal} from "./ICouponSnapshotManagementInternal.sol";
+import {IRegisterMetadataInternal} from "../metadata/IRegisterMetadataInternal.sol";
+import {RegisterRoleManagementInternal} from "../role/RegisterRoleManagementInternal.sol";
+import {SmartContractAccessManagementInternal} from "../access/SmartContractAccessManagementInternal.sol";
+import {InvestorManagementInternal} from "../investors/InvestorManagementInternal.sol";
+import {ERC20Snapshot} from "../../token/ERC20/extensions/ERC20Snapshot.sol";
+import {CouponSnapshotManagementStorage} from "./CouponSnapshotManagementStorage.sol";
+import {RegisterMetadataStorage} from "../metadata/RegisterMetadataStorage.sol";
+import {InvestorManagementStorage} from "../investors/InvestorManagementStorage.sol";
 
 abstract contract CouponSnapshotManagementInternal is
     ICouponSnapshotManagementInternal,
     IRegisterMetadataInternal,
-    ERC2771ContextInternal,
     RegisterRoleManagementInternal,
     SmartContractAccessManagementInternal,
     InvestorManagementInternal,
-    ERC20Snapshot,
-    ERC20Metadata
+    ERC20Snapshot
 {
-    function _msgSender()
-        internal
-        view
-        virtual
-        override(ContextInternal, ERC2771ContextInternal)
-        returns (address)
-    {
-        return ERC2771ContextInternal._msgSender();
-    }
-
-    function _msgData()
-        internal
-        view
-        virtual
-        override(ContextInternal, ERC2771ContextInternal)
-        returns (bytes calldata)
-    {
-        return ERC2771ContextInternal._msgData();
-    }
-
     function _currentSnapshotDatetime() internal view returns (uint256) {
         CouponSnapshotManagementStorage.Layout
             storage l = CouponSnapshotManagementStorage.layout();
@@ -149,11 +124,15 @@ abstract contract CouponSnapshotManagementInternal is
         CouponSnapshotManagementStorage.Layout
             storage l = CouponSnapshotManagementStorage.layout();
 
-        require(
-            from_ == address(0) ||
-                _balanceOf(from_) >= l.amountLocked[from_] + amount_,
-            "Asset Locked"
-        );
+        if (from_ != address(0)) {
+            uint256 lockedAmount = l.amountLocked[from_];
+
+            require(
+                lockedAmount == 0 ||
+                    _balanceOf(from_) >= lockedAmount + amount_,
+                "Asset Locked"
+            );
+        }
 
         // TODO : check the amount to allow the transfer for the excess of the locked amount
 
@@ -318,8 +297,41 @@ abstract contract CouponSnapshotManagementInternal is
         return (_investorResult);
     }
 
+    function _returnBalanceToPrimaryIssuanceAccount(
+        address investor
+    ) internal virtual returns (bool) {
+        RegisterMetadataStorage.Layout storage l = RegisterMetadataStorage
+            .layout();
+        // can only be called by allowed smart contract (typically the redemption contrat)
+        /** @dev enforce caller contract is whitelisted */
+        require(
+            _isContractAllowed(msg.sender),
+            "This contract is not whitelisted"
+        );
+        //make sure the investor is an allowed investor
+        require(
+            _investorsAllowed(investor) == true,
+            "The investor is not whitelisted"
+        );
+        // ensure the transfer only happens when the current time is after the maturity cut of time
+        uint256 couponDate = _currentCouponDate();
+        require(
+            (couponDate == l.data.maturityDate || couponDate == 0) &&
+                block.timestamp > _currentSnapshotDatetime(),
+            "returning the balance to the primary issuance can only be done after the maturity cut off time"
+        );
+        uint256 balance = _balanceOf(investor);
+        require(balance > 0, "no balance to return for this investor");
+        _forceNextTransfer(); // make the _beforeTokenTransfer control ignore the end of life of the bond
+        _transfer(investor, l.primaryIssuanceAccount, balance);
+        return true;
+    }
+
+    /**
+     * @dev The aim of this function is to enable the CAK to mint some bond units
+     */
     function _mint(uint256 amount_) internal {
-        require(_hasRole(CAK_ROLE, _msgSender()), "Caller must be CAK");
+        require(_isCAK(msg.sender), "Caller must be CAK");
 
         RegisterMetadataStorage.Layout storage l = RegisterMetadataStorage
             .layout();
@@ -333,7 +345,7 @@ abstract contract CouponSnapshotManagementInternal is
     }
 
     function _burn(uint256 amount_) internal {
-        require(_hasRole(CAK_ROLE, _msgSender()), "Caller must be CAK");
+        require(_isCAK(msg.sender), "Caller must be CAK");
         RegisterMetadataStorage.Layout storage l = RegisterMetadataStorage
             .layout();
         _forceNextTransfer(); // make the _beforeTokenTransfer ignore that we are at the end of the bond
@@ -344,7 +356,7 @@ abstract contract CouponSnapshotManagementInternal is
         if (_balanceOf(l.primaryIssuanceAccount) == 0 && _totalSupply() == 0) {
             l.status = Status.Repaid;
             emit RegisterStatusChanged(
-                _msgSender(),
+                msg.sender,
                 l.data.name,
                 l.data.isin,
                 l.status
@@ -367,12 +379,14 @@ abstract contract CouponSnapshotManagementInternal is
             .layout();
         //FIXME: redemption:  if currentTS==0 deny all  (returns false) transfer except if TO= PrimaryIssuanceAccount
         /** @dev if sender is CAK then any transfer is accepted */
-        if (_hasRole(CAK_ROLE, msg.sender)) {
+        if (_isCAK(msg.sender)) {
             _transfer(from_, to_, amount_);
+
             return true;
         } else {
             // Not called directly from a CAK user
             /** @dev enforce caller contract is whitelisted */
+
             require(
                 _isContractAllowed(msg.sender),
                 "This contract is not whitelisted"
@@ -390,7 +404,7 @@ abstract contract CouponSnapshotManagementInternal is
             // we can change the status of the register, BnD wallet will not be whitelisted
             if (
                 l.status == IRegisterMetadataInternal.Status.Ready &&
-                _hasRole(BND_ROLE, to_) &&
+                _isBnD(to_) &&
                 from_ == l.primaryIssuanceAccount
             ) {
                 l.status = IRegisterMetadataInternal.Status.Issued;
@@ -399,7 +413,7 @@ abstract contract CouponSnapshotManagementInternal is
                 _initInvestor(to_, address(0), false);
 
                 emit RegisterStatusChanged(
-                    _msgSender(),
+                    msg.sender,
                     l.data.name,
                     l.data.isin,
                     l.status
@@ -408,6 +422,7 @@ abstract contract CouponSnapshotManagementInternal is
                 // standard case
 
                 //make sure the recipient is an allowed investor
+
                 require(
                     _investorsAllowed(to_) == true,
                     "The receiver is not allowed"
@@ -415,12 +430,13 @@ abstract contract CouponSnapshotManagementInternal is
 
                 require(
                     _investorsAllowed(from_) == true || // the seller must be a valid investor at the time of transfer
-                        _hasRole(BND_ROLE, from_), // or the seller is the B&D for the primary distribution
+                        _isBnD(from_), // or the seller is the B&D for the primary distribution
                     "The sender is not allowed"
                 );
             }
 
             _transfer(from_, to_, amount_);
+
             return true;
         }
     }
@@ -429,68 +445,77 @@ abstract contract CouponSnapshotManagementInternal is
         address from,
         address to,
         uint256 amount,
-        bytes32 txId,
-        bytes32 hL,
-        bytes32 hR,
-        bytes32 hC,
-        uint256 pDate,
-        uint256 dDate,
+        bytes32 transactionId,
+        bytes32 hashLock,
+        bytes32 hashRelease,
+        bytes32 hashCancel,
+        uint256 paymentDate,
+        uint256 deliveryDate,
         bytes32 proof
     ) internal {
-        // check the HTLC status
+        // check access
         require(
-            _hasRole(CAK_ROLE, msg.sender) ||
-                _hasRole(BND_ROLE, msg.sender) ||
+            _isCAK(msg.sender) ||
+                _isBnD(msg.sender) ||
                 _investorsAllowed(msg.sender) ||
                 _isContractAllowed(msg.sender),
             "Access Denied"
         );
 
+        // check from and to
+        require(_investorsAllowed(to), "To not allowed");
+
+        // check inputs
+        require(
+            paymentDate > block.timestamp && deliveryDate >= paymentDate,
+            "Invalid dates"
+        );
+
         CouponSnapshotManagementStorage.Layout
             storage l = CouponSnapshotManagementStorage.layout();
 
-        LStatus _lockStatus = l.locks[txId].status;
+        LockStatus _lockStatus = l.locks[transactionId].status;
 
         // check the HTLC status
+        require(_lockStatus == LockStatus.Unlocked, "Invalid Status");
+
+        // check balance
         require(
-            _lockStatus == LStatus.Unlocked &&
-                _balanceOf(from) >= amount + l.amountLocked[from] &&
-                pDate > block.timestamp &&
-                dDate >= pDate,
-            "Invalid date"
+            _balanceOf(from) >= amount + l.amountLocked[from],
+            "Invalid balance"
         );
 
         l.amountLocked[from] += amount;
 
         // set the lock information
-        l.locks[txId] = Lock(
+        l.locks[transactionId] = Lock(
             from,
             to,
             amount,
-            txId,
-            hL,
-            hR,
-            hC,
-            pDate,
-            dDate,
+            transactionId,
+            hashLock,
+            hashRelease,
+            hashCancel,
+            paymentDate,
+            deliveryDate,
             proof,
-            LStatus.Locked
+            LockStatus.Locked
         );
 
         // emit the event
-        emit AssetHTLC(txId, from, to, hL, LStatus.Locked);
+        emit AssetHTLC(transactionId, from, to, hashLock, LockStatus.Locked);
     }
 
     function _release(
-        bytes32 txId,
+        bytes32 transactionId,
         bytes32 secret,
         bytes32 proof,
-        LStatus status_
+        LockStatus status_
     ) internal {
         // check the HTLC status
         require(
-            _hasRole(CAK_ROLE, msg.sender) ||
-                _hasRole(BND_ROLE, msg.sender) ||
+            _isCAK(msg.sender) ||
+                _isBnD(msg.sender) ||
                 _investorsAllowed(msg.sender) ||
                 _isContractAllowed(msg.sender),
             "Access Denied"
@@ -500,29 +525,32 @@ abstract contract CouponSnapshotManagementInternal is
             storage l = CouponSnapshotManagementStorage.layout();
 
         // get the lock information
-        Lock storage lock_ = l.locks[txId];
+        Lock storage lock_ = l.locks[transactionId];
 
         // check the HTLC status
-        require(lock_.status == LStatus.Locked, "Invalid Status");
+        require(lock_.status == LockStatus.Locked, "Invalid Status");
 
         // check the HTLC secret
-        bytes32 h;
-        uint256 date;
-        if (status_ == LStatus.Released) {
-            h = lock_.hL;
-            date = 0;
-        } else if (status_ == LStatus.Forced) {
-            h = lock_.hR;
-            date = lock_.dDate;
-        } else if (status_ == LStatus.Cancelled) {
-            h = lock_.hC;
-            date = lock_.pDate;
+        bytes32 _hash;
+        uint256 _date;
+        if (status_ == LockStatus.Released) {
+            _hash = lock_.hashLock;
+            _date = 0;
+        } else if (status_ == LockStatus.Forced) {
+            _hash = lock_.hashRelease;
+            _date = lock_.deliveryDate;
+        } else if (status_ == LockStatus.Cancelled) {
+            _hash = lock_.hashCancel;
+            _date = _hash == lock_.hashLock
+                ? lock_.deliveryDate
+                : lock_.paymentDate;
         }
 
-        require(
-            sha256(abi.encodePacked(secret)) == h && block.timestamp > date,
-            "Invalid Secret"
-        );
+        require(sha256(abi.encodePacked(secret)) == _hash, "Invalid Secret");
+
+        require(block.timestamp > _date, "Invalid Date");
+
+        // TODO add a fail safe mechanism to allow automatic unlock after a certain time (e.g. release date + 24 hours)
 
         // update status
         lock_.status = status_;
@@ -533,11 +561,33 @@ abstract contract CouponSnapshotManagementInternal is
         l.amountLocked[lock_.from] -= lock_.amount;
 
         // transfer the asset to the to
-        if (status_ != LStatus.Cancelled) {
+        if (status_ != LockStatus.Cancelled) {
             _transfer(lock_.from, lock_.to, lock_.amount);
         }
 
         // emit the event
-        emit AssetHTLC(txId, lock_.from, lock_.to, secret, status_);
+        emit AssetHTLC(transactionId, lock_.from, lock_.to, secret, status_);
+    }
+
+    function _getLock(
+        bytes32 transactionId
+    ) internal view returns (Lock memory) {
+        CouponSnapshotManagementStorage.Layout
+            storage l = CouponSnapshotManagementStorage.layout();
+
+        Lock memory lock_ = l.locks[transactionId];
+
+        require(lock_.status != LockStatus.Unlocked, "Invalid transactionId");
+
+        // only CAK and from and to can access the lock information
+        require(
+            _isContractAllowed(msg.sender) ||
+                _isCAK(msg.sender) ||
+                msg.sender == lock_.from ||
+                msg.sender == lock_.to,
+            "Access Denied"
+        );
+
+        return lock_;
     }
 }

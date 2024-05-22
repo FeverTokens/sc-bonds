@@ -3,20 +3,16 @@
 
 pragma solidity ^0.8.17;
 
-import { IERC1155BaseInternal } from "./IERC1155BaseInternal.sol";
-import { IERC1155Receiver } from "../IERC1155Receiver.sol";
-import { ERC1155BaseStorage } from "./ERC1155BaseStorage.sol";
-import { AddressUtils } from "../../../utils/AddressUtils.sol";
-import { ERC2771ContextInternal } from "../../../metatx/ERC2771ContextInternal.sol";
+import {IERC1155BaseInternal} from "./IERC1155BaseInternal.sol";
+import {IERC1155Receiver} from "../IERC1155Receiver.sol";
+import {ERC1155BaseStorage} from "./ERC1155BaseStorage.sol";
+import {AddressUtils} from "../../../utils/AddressUtils.sol";
 
 /**
  * @title Base ERC1155 internal functions
  * @dev derived from https://github.com/OpenZeppelin/openzeppelin-contracts/ (MIT license)
  */
-abstract contract ERC1155BaseInternal is
-    IERC1155BaseInternal,
-    ERC2771ContextInternal
-{
+abstract contract ERC1155BaseInternal is IERC1155BaseInternal {
     using AddressUtils for address;
 
     /**
@@ -30,7 +26,7 @@ abstract contract ERC1155BaseInternal is
         uint256 id
     ) internal view virtual returns (uint256) {
         if (account == address(0))
-            revert ERC1155Base__BalanceQueryZeroAddress();
+            revert("ERC1155Base: Balance Query Zero Address");
         return ERC1155BaseStorage.layout().balances[id][account];
     }
 
@@ -39,7 +35,7 @@ abstract contract ERC1155BaseInternal is
         uint256[] memory ids
     ) public view virtual returns (uint256[] memory) {
         if (accounts.length != ids.length)
-            revert ERC1155Base__ArrayLengthMismatch();
+            revert("ERC1155Base: Array Length Mismatch");
 
         mapping(uint256 => mapping(address => uint256))
             storage balances = ERC1155BaseStorage.layout().balances;
@@ -49,7 +45,7 @@ abstract contract ERC1155BaseInternal is
         unchecked {
             for (uint256 i; i < accounts.length; i++) {
                 if (accounts[i] == address(0))
-                    revert ERC1155Base__BalanceQueryZeroAddress();
+                    revert("ERC1155Base: Balance Query Zero Address");
                 batchBalances[i] = balances[ids[i]][accounts[i]];
             }
         }
@@ -65,11 +61,11 @@ abstract contract ERC1155BaseInternal is
     }
 
     function _setApprovalForAll(address operator, bool status) public virtual {
-        if (_msgSender() == operator) revert ERC1155Base__SelfApproval();
-        ERC1155BaseStorage.layout().operatorApprovals[_msgSender()][
+        if (msg.sender == operator) revert("ERC1155Base: Self Approval");
+        ERC1155BaseStorage.layout().operatorApprovals[msg.sender][
             operator
         ] = status;
-        emit ApprovalForAll(_msgSender(), operator, status);
+        emit ApprovalForAll(msg.sender, operator, status);
     }
 
     /**
@@ -86,10 +82,10 @@ abstract contract ERC1155BaseInternal is
         uint256 amount,
         bytes memory data
     ) internal virtual {
-        if (account == address(0)) revert ERC1155Base__MintToZeroAddress();
+        if (account == address(0)) revert("ERC1155Base: Mint To Zero Address");
 
         _beforeTokenTransfer(
-            _msgSender(),
+            msg.sender,
             address(0),
             account,
             _asSingletonArray(id),
@@ -99,7 +95,7 @@ abstract contract ERC1155BaseInternal is
 
         ERC1155BaseStorage.layout().balances[id][account] += amount;
 
-        emit TransferSingle(_msgSender(), address(0), account, id, amount);
+        emit TransferSingle(msg.sender, address(0), account, id, amount);
     }
 
     /**
@@ -118,7 +114,7 @@ abstract contract ERC1155BaseInternal is
         _mint(account, id, amount, data);
 
         _doSafeTransferAcceptanceCheck(
-            _msgSender(),
+            msg.sender,
             address(0),
             account,
             id,
@@ -141,12 +137,12 @@ abstract contract ERC1155BaseInternal is
         uint256[] memory amounts,
         bytes memory data
     ) internal virtual {
-        if (account == address(0)) revert ERC1155Base__MintToZeroAddress();
+        if (account == address(0)) revert("ERC1155Base: Mint To Zero Address");
         if (ids.length != amounts.length)
-            revert ERC1155Base__ArrayLengthMismatch();
+            revert("ERC1155Base: Array Length Mismatch");
 
         _beforeTokenTransfer(
-            _msgSender(),
+            msg.sender,
             address(0),
             account,
             ids,
@@ -164,7 +160,7 @@ abstract contract ERC1155BaseInternal is
             }
         }
 
-        emit TransferBatch(_msgSender(), address(0), account, ids, amounts);
+        emit TransferBatch(msg.sender, address(0), account, ids, amounts);
     }
 
     /**
@@ -183,7 +179,7 @@ abstract contract ERC1155BaseInternal is
         _mintBatch(account, ids, amounts, data);
 
         _doSafeBatchTransferAcceptanceCheck(
-            _msgSender(),
+            msg.sender,
             address(0),
             account,
             ids,
@@ -203,10 +199,11 @@ abstract contract ERC1155BaseInternal is
         uint256 id,
         uint256 amount
     ) internal virtual {
-        if (account == address(0)) revert ERC1155Base__BurnFromZeroAddress();
+        if (account == address(0))
+            revert("ERC1155Base: Burn From Zero Address");
 
         _beforeTokenTransfer(
-            _msgSender(),
+            msg.sender,
             account,
             address(0),
             _asSingletonArray(id),
@@ -220,11 +217,11 @@ abstract contract ERC1155BaseInternal is
 
         unchecked {
             if (amount > balances[account])
-                revert ERC1155Base__BurnExceedsBalance();
+                revert("ERC1155Base: Burn Exceeds Balance");
             balances[account] -= amount;
         }
 
-        emit TransferSingle(_msgSender(), account, address(0), id, amount);
+        emit TransferSingle(msg.sender, account, address(0), id, amount);
     }
 
     /**
@@ -238,18 +235,12 @@ abstract contract ERC1155BaseInternal is
         uint256[] memory ids,
         uint256[] memory amounts
     ) internal virtual {
-        if (account == address(0)) revert ERC1155Base__BurnFromZeroAddress();
+        if (account == address(0))
+            revert("ERC1155Base: Burn From Zero Address");
         if (ids.length != amounts.length)
-            revert ERC1155Base__ArrayLengthMismatch();
+            revert("ERC1155Base: Array Length Mismatch");
 
-        _beforeTokenTransfer(
-            _msgSender(),
-            account,
-            address(0),
-            ids,
-            amounts,
-            ""
-        );
+        _beforeTokenTransfer(msg.sender, account, address(0), ids, amounts, "");
 
         mapping(uint256 => mapping(address => uint256))
             storage balances = ERC1155BaseStorage.layout().balances;
@@ -258,12 +249,12 @@ abstract contract ERC1155BaseInternal is
             for (uint256 i; i < ids.length; i++) {
                 uint256 id = ids[i];
                 if (amounts[i] > balances[id][account])
-                    revert ERC1155Base__BurnExceedsBalance();
+                    revert("ERC1155Base: Burn Exceeds Balance");
                 balances[id][account] -= amounts[i];
             }
         }
 
-        emit TransferBatch(_msgSender(), account, address(0), ids, amounts);
+        emit TransferBatch(msg.sender, account, address(0), ids, amounts);
     }
 
     /**
@@ -285,7 +276,7 @@ abstract contract ERC1155BaseInternal is
         bytes memory data
     ) internal virtual {
         if (recipient == address(0))
-            revert ERC1155Base__TransferToZeroAddress();
+            revert("ERC1155Base: Transfer To Zero Address");
 
         _beforeTokenTransfer(
             operator,
@@ -302,7 +293,7 @@ abstract contract ERC1155BaseInternal is
         unchecked {
             uint256 senderBalance = balances[id][sender];
             if (amount > senderBalance)
-                revert ERC1155Base__TransferExceedsBalance();
+                revert("ERC1155Base: Transfer Exceeds Balance");
             balances[id][sender] = senderBalance - amount;
         }
 
@@ -359,9 +350,9 @@ abstract contract ERC1155BaseInternal is
         bytes memory data
     ) internal virtual {
         if (recipient == address(0))
-            revert ERC1155Base__TransferToZeroAddress();
+            revert("ERC1155Base: Transfer To Zero Address");
         if (ids.length != amounts.length)
-            revert ERC1155Base__ArrayLengthMismatch();
+            revert("ERC1155Base: Array Length Mismatch");
 
         _beforeTokenTransfer(operator, sender, recipient, ids, amounts, data);
 
@@ -376,7 +367,7 @@ abstract contract ERC1155BaseInternal is
                 uint256 senderBalance = balances[token][sender];
 
                 if (amount > senderBalance)
-                    revert ERC1155Base__TransferExceedsBalance();
+                    revert("ERC1155Base: Transfer Exceeds Balance");
 
                 balances[token][sender] = senderBalance - amount;
 
@@ -460,11 +451,11 @@ abstract contract ERC1155BaseInternal is
                 )
             returns (bytes4 response) {
                 if (response != IERC1155Receiver.onERC1155Received.selector)
-                    revert ERC1155Base__ERC1155ReceiverRejected();
+                    revert("ERC1155Base: ERC1155Receiver Rejected");
             } catch Error(string memory reason) {
                 revert(reason);
             } catch {
-                revert ERC1155Base__ERC1155ReceiverNotImplemented();
+                revert("ERC1155Base: ERC1155Receiver Not Implemented");
             }
         }
     }
@@ -498,11 +489,11 @@ abstract contract ERC1155BaseInternal is
             returns (bytes4 response) {
                 if (
                     response != IERC1155Receiver.onERC1155BatchReceived.selector
-                ) revert ERC1155Base__ERC1155ReceiverRejected();
+                ) revert("ERC1155Base: ERC1155Receiver Rejected");
             } catch Error(string memory reason) {
                 revert(reason);
             } catch {
-                revert ERC1155Base__ERC1155ReceiverNotImplemented();
+                revert("ERC1155Base: ERC1155Receiver Not Implemented");
             }
         }
     }
